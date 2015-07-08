@@ -1,0 +1,402 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body
+{
+  background-color: #9f94ba;
+}
+
+h2
+{
+  color: #ffffff; 
+  font-family: 'Lato', sans-serif; 
+  font-size: 30px; 
+  font-weight: 300; 
+  text-shadow: 1px 1px #000000;
+  text-align: center;
+}
+
+h3
+{
+  color: #ffffff; 
+  font-family: 'Lato', sans-serif; 
+  font-size: 20px; 
+  font-weight: 300; 
+  text-shadow: 1px 1px #000000;
+  text-align: center;
+}
+
+#topPage
+{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  min-height: 12%;
+  z-index: -1;
+}
+
+#zizoLogo
+{
+  position: absolute;
+  left: 150px;
+  top: 0px;
+  height: auto;
+  width: auto;
+}
+
+#bottomPage
+{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  min-height: 12%;
+}
+
+#loginDiv
+{
+  width: 35em;
+  height: 35em;
+  position: absolute;
+  top: 10em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#loginForm
+{
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 35em;
+}
+
+#version
+{
+  position: fixed;
+  top: 85%;
+  right: 94.5%;
+  color: #ffffff; 
+  font-family: 'Lato', sans-serif; 
+  font-size: 10px; 
+  font-weight: 300; 
+  text-shadow: 1px 1px #000000;
+  text-align: center;
+}
+
+#projectTextbox
+{
+  position: fixed;
+  height: 25px;
+  width: 12.5em;
+  margin-left: 16em;
+}
+#projectLabel
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position:fixed;	
+  margin-left: 6.05em;
+}
+
+#usernameTextbox
+{
+  position: fixed;
+  height: 25px;
+  width: 12.5em;
+  margin-left: 16em;
+}
+#usernameLabel
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position:fixed;	
+  margin-left: 7em;
+}
+
+#passwordTextbox
+{
+  position: fixed;
+  height: 25px;
+  width: 12.5em;
+  margin-left: 16em;
+}
+
+#passwordLabel
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position: fixed;
+  margin-left: 7.65em;
+}
+
+#resetButton
+{
+  position: fixed;
+  margin-left: 13.1em;
+  width: 6em;
+}
+
+#submitButton
+{	
+  position: fixed;
+  margin-left: 19.2em;
+  width: 6em;
+}
+
+.loginButtons
+{
+  -webkit-border-radius: 25;
+  -moz-border-radius: 25;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #5C5CD7;
+  padding: 4px 15px 4px 15px;
+  text-decoration: none;
+}
+
+.loginButtons:hover
+{
+  background: #7C75D3;
+  text-decoration: none;
+}
+
+#menu 
+{
+  position: relative;
+  width: 100%;
+  height: 35px;
+  font-size: 16px;
+  font-family: Tahoma, Geneva, sans-serif;
+  color: #f0ffff;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 3px 2px 3px #333333;
+  background-color: #5C5CD7;
+  border-radius: 8px;
+  top: 6.67em;
+}
+
+#menu ul 
+{
+  height: auto;
+  padding: 8px 0px;
+  margin: 0px;
+}
+
+#menu li 
+{ 
+  display: inline; 
+  padding: 13%; 
+}
+
+#menu a 
+{
+  text-decoration: none;
+  color: #fffff;
+  padding: 8px 8px 8px 8px;
+}
+
+#menu a:hover 
+{
+  color: #F90;
+  background-color: #FFF;
+  
+}
+
+#registryTableDiv
+{
+  position: relative;
+  overflow: auto;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+table#registryTable
+{
+  width: 100%; 
+  height: 100%;
+  background-color: #f1f1c1;
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th 
+{
+  text-align: left;
+  border: 1px solid black;
+  background-color: #5C5CD7;
+  color: #F0F2F0;
+}
+
+td
+{
+  border: 1px solid black;
+  background-color: #B0B0EB;
+}
+
+#projectDropDown
+{
+  position: relative;
+  top: 11em;
+  left: 12em;
+}
+
+#comboBoxLabel
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position:fixed;
+  top: 11.40em;	
+  left: 2em;
+}
+
+#pageLayout
+{
+  position: relative;
+  top: 5em;
+  width: 80em;
+  height: 25em;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  margin: auto;
+}
+
+#deleteButton
+{
+  position: fixed;
+  top: 45em;
+  margin-left: 68.9em;
+  width: 6.5%;
+  height: 2em;
+}
+
+#addButton
+{
+  position: fixed;
+  top: 45em;
+  margin-left: 77.2em;
+  width: 6.5%;
+  height: 2em;
+}
+
+#loggedInUserLabel
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position: fixed;
+  left: 2%;
+  top: 80%;
+}
+
+a
+{
+  color: #f0ffff;
+}
+
+/*#################################### Popup  ############################################################*/
+
+#blanket 
+{
+  background-color:#dddddd;
+  opacity: 0.65;
+  *background:none;
+  position:absolute;
+  z-index: 9001;
+  top:0px;
+  left:0px;
+  width:100%;
+}
+
+#popUpDiv 
+{
+  position:absolute;
+  background-color:#FFFFF0;
+  width:460px;
+  height:245px;
+  border:2px solid #000;
+  z-index: 9002;
+}
+
+#tick
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+#popupTitle
+{
+  color: #575757;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  line-height: 60px;
+  display: block;
+}
+
+#popupParagraph
+{
+  font-size: 16px;
+  text-align: center;
+  font-weight: 300;
+  position: relative;
+  float: none;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+}
+
+.popupButtons
+{
+  color: #fff;
+  border: 0;
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px 32px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #27a155;
+}
+
+.popupButtons:hover
+{
+  background: #7AB97A;
+  text-decoration: none;
+}
+
+.dismissButton
+{
+  color: #fff;
+  border: 0;
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px 32px;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: #C03030;
+}
+
+.dismissButton:hover
+{
+  background: #CE5E5E;
+  text-decoration: none;
+}
