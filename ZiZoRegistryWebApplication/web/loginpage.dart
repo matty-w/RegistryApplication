@@ -1,11 +1,14 @@
 import 'dart:html';
-import 'navigationfunctions.dart';
-import 'popupconstruct.dart';
+import 'loadscreenelements.dart';
 
 void main() 
 {
-  PopupWindow p = new PopupWindow();
-  NavigationFunctions navigate = new NavigationFunctions();
-  querySelector("#submitButton").onClick.listen(navigate.login);
-  querySelector("#dismissFinal").onClick.listen(p.dismissPrompt);
+  window.onContentLoaded.listen(refresh);
+  refresh(null);
+}
+
+void refresh(Event e)
+{
+  LoadScreenElements pageElements = new LoadScreenElements();
+  pageElements.loginPage();
 }

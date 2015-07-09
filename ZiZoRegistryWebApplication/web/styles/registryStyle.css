@@ -191,7 +191,10 @@ h3
 #menu li 
 { 
   display: inline; 
-  padding: 13%; 
+  padding-left: 0em;
+  padding-right: 0em;
+  margin-left: 12em;
+  margin-right: 12em;
 }
 
 #menu a 
@@ -223,7 +226,6 @@ h3
 table#registryTable
 {
   width: 100%; 
-  height: 100%;
   background-color: #f1f1c1;
   border: 1px solid black;
   border-collapse: collapse;
@@ -263,9 +265,9 @@ td
 #pageLayout
 {
   position: relative;
-  top: 5em;
-  width: 80em;
-  height: 25em;
+  top: 7em;
+  width: 70em;
+  height: 20em;
   bottom: auto;
   left: auto;
   right: auto;
@@ -275,8 +277,8 @@ td
 #deleteButton
 {
   position: fixed;
-  top: 45em;
-  margin-left: 68.9em;
+  top: 41.5em;
+  margin-left: 58em;
   width: 6.5%;
   height: 2em;
 }
@@ -284,10 +286,19 @@ td
 #addButton
 {
   position: fixed;
-  top: 45em;
-  margin-left: 77.2em;
+  top: 41.5em;
+  margin-left: 66.5em;
   width: 6.5%;
   height: 2em;
+}
+
+#searchButton
+{
+  position: fixed;
+  top: 13.7em;
+  margin-left: 0em;
+  width: 8%;
+  height: 1.9em;
 }
 
 #loggedInUserLabel

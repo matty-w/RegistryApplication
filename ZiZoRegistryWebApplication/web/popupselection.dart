@@ -1,6 +1,5 @@
 library selectPopup;
 
-import 'dart:html';
 import 'popupconstruct.dart';
 
 class SelectPopup
