@@ -78,8 +78,8 @@ class PopupWindow
   
   void buttons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool clipboard)
   {
-    ButtonElement button1 = querySelector("#dismissFail");
-    ButtonElement button2 = querySelector("#dismissSuccess");
+    ButtonElement button1 = querySelector("#no");
+    ButtonElement button2 = querySelector("#yes");
     ButtonElement button3 = querySelector("#dismissFinal");
     ButtonElement button4 = querySelector("#clipboard");
     

@@ -169,7 +169,7 @@ h3
 {
   position: relative;
   width: 100%;
-  height: 35px;
+  min-height: 13%;
   font-size: 16px;
   font-family: Tahoma, Geneva, sans-serif;
   color: #f0ffff;
@@ -295,9 +295,9 @@ td
 #searchButton
 {
   position: fixed;
-  top: 13.7em;
-  margin-left: 0em;
-  width: 8%;
+  top: 11.9em;
+  margin-left: 11em;
+  width: 10%;
   height: 1.9em;
 }
 

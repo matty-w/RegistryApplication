@@ -32,6 +32,9 @@ class ChangeTable
   void passProjectChoice(String project)
   {
     TableElement table = querySelector("#registryTable");
+    //InputElement list = querySelector("#projectDropDown");
+    //int arrayLength = list.children.length;   
+    
     
     if(project == null)
     {
