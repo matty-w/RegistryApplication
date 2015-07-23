@@ -69,7 +69,6 @@ class PopupWindow
   
   void popup(String popupId)
   {
-    print("popup"+popupId);
     blanketSize(popupId);
     windowPosition(popupId);
     show('#blanket');

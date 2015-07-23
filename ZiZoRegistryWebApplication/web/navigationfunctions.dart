@@ -2,16 +2,20 @@ library navigation;
 
 import 'dart:html';
 import 'popupselection.dart';
+import 'serverrequest.dart';
 
 class NavigationFunctions
 {
+  HttpRequest request;
+  StringBuffer buffer = new StringBuffer();
+  SelectPopup sp = new SelectPopup();
+  Storage local = window.sessionStorage;
+  
   login(MouseEvent m)
   {
-    SelectPopup sp = new SelectPopup();
     InputElement username = querySelector("#usernameTextbox");
     InputElement password = querySelector("#passwordTextbox");
     InputElement project =  querySelector("#projectTextbox");
-    Storage local = window.sessionStorage;
     local['username'] = username.value;
     local['password'] = password.value;
     local['project'] = project.value;
@@ -26,10 +30,7 @@ class NavigationFunctions
       sp.popupError("no-password", "#popUpDiv");
       return;
     }
-    else
-    {
-      window.location.href = "registryMain.html";
-    }
+    ServerRequest.login(username.value, password.value, goToPage, presentErrorPopup);
   }
   
   logout(MouseEvent m)
@@ -45,5 +46,16 @@ class NavigationFunctions
   {
     window.location.href = "registryMain.html";
   }
-
+    
+  goToPage()
+  {
+    window.location.href = "registryMain.html";
+  }
+  
+  presentErrorPopup()
+  {
+    local['username'] = "";
+    local['password'] = "";
+    sp.popupError("details-incorrect", "#popUpDiv");
+  } 
 }
