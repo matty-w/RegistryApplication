@@ -12,7 +12,6 @@ class ServerRequest extends SoapRequest
     window.alert(password);
     result = new ServerRequest();
     result.setAction("version");
-    result.addArgument("someArgument");
     result.setUsername(username);
     window.alert("4");
     result.setPassword(password);

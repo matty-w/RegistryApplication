@@ -31,13 +31,11 @@ class LoadScreenElements
     querySelector("#searchButton").onClick.listen(listenToBox);
   }
   
-  listenToBox(MouseEvent m)
+  void listenToBox(MouseEvent m)
   {
     ChangeTable table = new ChangeTable();
     InputElement project = querySelector("#projectDropDown");
     window.sessionStorage['project'] = project.value;
     table.setTable();
   }
-  
-
 }

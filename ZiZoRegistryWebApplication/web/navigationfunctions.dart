@@ -6,12 +6,22 @@ import 'serverrequest.dart';
 
 class NavigationFunctions
 {
-  HttpRequest request;
   StringBuffer buffer = new StringBuffer();
-  SelectPopup sp = new SelectPopup();
   Storage local = window.sessionStorage;
+  HttpRequest request;
+  SelectPopup sp = new SelectPopup();
+ 
+  void goToHomePage(MouseEvent m)
+  {
+    window.location.href = "registryMain.html";
+  }
   
-  login(MouseEvent m)
+  void goToPage()
+  {
+    window.location.href = "registryMain.html";
+  }
+    
+  void login(MouseEvent m)
   {
     InputElement username = querySelector("#usernameTextbox");
     InputElement password = querySelector("#passwordTextbox");
@@ -33,7 +43,7 @@ class NavigationFunctions
     ServerRequest.login(username.value, password.value, goToPage, presentErrorPopup);
   }
   
-  logout(MouseEvent m)
+  void logout(MouseEvent m)
   {
     Storage local = window.sessionStorage;
     local['username'] = "";
@@ -42,17 +52,7 @@ class NavigationFunctions
     window.location.href = "loginPage.html";
   }
   
-  goToHomePage(MouseEvent m)
-  {
-    window.location.href = "registryMain.html";
-  }
-    
-  goToPage()
-  {
-    window.location.href = "registryMain.html";
-  }
-  
-  presentErrorPopup()
+  void presentErrorPopup()
   {
     local['username'] = "";
     local['password'] = "";

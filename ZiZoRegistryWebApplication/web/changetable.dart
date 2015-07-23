@@ -16,25 +16,11 @@ class ChangeTable
     return table;
   }
   
-  void showTable(MouseEvent m)
-  {
-    TableElement table = querySelector("#registryTable");
-    if(listenToCombobox() == "registryTable")
-    {
-      table.hidden = false;
-    }
-    else
-    {
-      table.hidden = true;
-    }
-  }
-  
   void passProjectChoice(String project)
   {
     TableElement table = querySelector("#registryTable");
     //InputElement list = querySelector("#projectDropDown");
     //int arrayLength = list.children.length;   
-    
     
     if(project == null)
     {
@@ -57,5 +43,18 @@ class ChangeTable
     project.value = window.sessionStorage['project'];
     String chosenProject = project.value;   
     passProjectChoice(chosenProject); 
+  }
+  
+  void showTable(MouseEvent m)
+  {
+    TableElement table = querySelector("#registryTable");
+    if(listenToCombobox() == "registryTable")
+    {
+      table.hidden = false;
+    }
+    else
+    {
+      table.hidden = true;
+    }
   }
 }

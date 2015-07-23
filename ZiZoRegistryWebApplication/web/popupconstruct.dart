@@ -6,19 +6,6 @@ String licenceName;
 
 class PopupWindow
 {
-  void hide(div_id)
-  {
-    DivElement el = querySelector(div_id);  
-    el.style.display = "none";   
-  }
-  
-  void show(div_id)
-  {
-    DivElement el = querySelector(div_id);  
-    el.style.display = "block";  
-  }
-
-
   Rectangle blanketSize(String popupId)
   {
     int viewportHeight, blanketHeight, popupHeight;
@@ -40,40 +27,6 @@ class PopupWindow
    
     return new Rectangle(0, 0, 0, viewportHeight);
   }
- 
-  Point windowPosition(String popupId)
-  {
-    int windowWidth;
-    int viewportWidth = window.innerHeight;
-    HtmlHtmlElement frame = document.body.parentNode;
-    
-    if ((viewportWidth > frame.scrollWidth) && (viewportWidth > frame.clientWidth))
-      windowWidth = viewportWidth;
-    else if(frame.clientWidth > frame.scrollWidth)
-      windowWidth = frame.clientWidth;
-    else
-      windowWidth = frame.scrollWidth;
-       
-    DivElement popUpDiv = querySelector(popupId);
-    windowWidth = (windowWidth/2-200).floor();
-    popUpDiv.style.left = windowWidth.toString() + 'px';
-    
-    return new Point(windowWidth, 0);
-  }
-  
-  void dismiss(String popupId)
-  {
-    hide("#blanket");
-    hide(popupId);
-  }
-  
-  void popup(String popupId)
-  {
-    blanketSize(popupId);
-    windowPosition(popupId);
-    show('#blanket');
-    show(popupId); 
-  }
   
   void buttons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool clipboard)
   {
@@ -86,6 +39,52 @@ class PopupWindow
     button2.hidden = dismissSuccess;
     button3.hidden = dismissFinal;
     button4.hidden = clipboard; 
+  }
+  
+  void dismiss(String popupId)
+  {
+    hide("#blanket");
+    hide(popupId);
+  }
+  
+  void dismissPrompt(MouseEvent e)
+  {
+    dismiss("#popUpDiv");
+  }
+  
+  String getLicenceName()
+  {
+    return licenceName;
+  }
+  
+  void getResult(Function popup, String response)
+  {
+    OutputElement output = querySelector("#serverResponse");
+    output.innerHtml = response;
+    licenceName = response;
+    popup; 
+  }
+  
+  void hide(div_id)
+  {
+    DivElement el = querySelector(div_id);  
+    el.style.display = "none";   
+  }
+  
+  void popup(String popupId)
+  {
+    blanketSize(popupId);
+    windowPosition(popupId);
+    show('#blanket');
+    show(popupId); 
+  }
+  
+  void setErrorPicture(bool a)
+  {
+    if(a == true)
+      querySelector("#tick").setAttribute("src", "images/dialogWarning2.png");
+    else
+      querySelector("#tick").setAttribute("src", "images/ticksmall.png");
   }
   
   void setFailText(String title, String description)
@@ -132,29 +131,37 @@ class PopupWindow
     }
   }
   
-  void setErrorPicture(bool a)
+  void show(div_id)
   {
-    if(a == true)
-      querySelector("#tick").setAttribute("src", "images/dialogWarning2.png");
+    DivElement el = querySelector(div_id);  
+    el.style.display = "block";  
+  }
+
+  Point windowPosition(String popupId)
+  {
+    int windowWidth;
+    int viewportWidth = window.innerHeight;
+    HtmlHtmlElement frame = document.body.parentNode;
+    
+    if ((viewportWidth > frame.scrollWidth) && (viewportWidth > frame.clientWidth))
+      windowWidth = viewportWidth;
+    else if(frame.clientWidth > frame.scrollWidth)
+      windowWidth = frame.clientWidth;
     else
-      querySelector("#tick").setAttribute("src", "images/ticksmall.png");
-  }
-  
-  void getResult(Function popup, String response)
-  {
-    OutputElement output = querySelector("#serverResponse");
-    output.innerHtml = response;
-    licenceName = response;
-    popup; 
-  }
-  
-  String getLicenceName()
-  {
-    return licenceName;
-  }
-  
-  void dismissPrompt(MouseEvent e)
-  {
-    dismiss("#popUpDiv");
+      windowWidth = frame.scrollWidth;
+       
+    DivElement popUpDiv = querySelector(popupId);
+    windowWidth = (windowWidth/2-200).floor();
+    popUpDiv.style.left = windowWidth.toString() + 'px';
+    
+    return new Point(windowWidth, 0);
   }
 }
+  
+
+  
+
+  
+
+  
+
