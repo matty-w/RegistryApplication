@@ -34,21 +34,22 @@
     <h2>The ZiZo Registry Application</h2>
     <h3>Please Login To Continue:</h3>
     <br>
-    <p><label id="projectLabel" for="projectTextbox">Project Name:</label>
-    <input type="text" list="projects" id="projectTextbox" value="" required/>
-    <datalist id="projects"><option>ViperDb</option></datalist></p>
-    <br>
+    <div id="loginDetailsDiv">
     <p><label id="usernameLabel" for="projectTextbox">User Name:</label>
     <input type="text" id="usernameTextbox" value="" required/></p>
     <br>
     <p><label id="passwordLabel" for="passwordTextbox">Password:</label>
     <input type="password" id="passwordTextbox" value="" required/></p>
-    <br><br><br>
+    </div>
+    <div id="buttonDiv">
     <button id="resetButton" type="reset" class="loginButtons">Reset</button>
     <button id="submitButton" type="button" class="loginButtons">Submit</button>
+    </div>
     </form>
   </div>
-  <text id = "version">Version: 0.1.0</text>   
+  <div id="versionDiv">
+  <text id = "version">Version: 2.3.3</text>
+  </div>   
 
 
 

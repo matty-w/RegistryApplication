@@ -2,15 +2,21 @@ library soap;
 
 import 'dart:html';
 import 'dart:async';
+import 'navigationfunctions.dart';
+import 'popupselection.dart';
+import 'popupconstruct.dart';
+import 'loadscreenelements.dart';
 
 class SoapRequest
 {
   String action;
   List<Object> arguments = new List();
+  List<String> catalogueNames = new List();
   StringBuffer buffer = new StringBuffer();
   String password;
   HttpRequest request = new HttpRequest();
   String username;
+  String _host;
 
   void addArgument(String arg)
   {
@@ -26,6 +32,7 @@ class SoapRequest
   {
     String credentials = createCredentials();
     var base64 = window.btoa(credentials);
+    window.sessionStorage['credentials'] = base64.toString();
     return base64.toString();
   }
   
@@ -39,26 +46,54 @@ class SoapRequest
     return arguments[i];
   }
   
-  void getResponse(Function onReturn)
+  void getLoginResponse()
   {
-    sendRequest().listen((ProgressEvent e)
+    sendLoginRequest().listen((ProgressEvent e)
     {
-      window.alert(request.readyState.toString()+" "+request.status.toString());
       if(request.readyState == 4)
       {
         if(request.status == 200)
         {
-          onReturn(window.alert("Some Response"));
+          NavigationFunctions nav = new NavigationFunctions();
+          nav.goToPage();
         }
-        if(request.status == 404)
+        else
         {
-          onReturn(window.alert("404 - Page Was Not Found."));
-        }
-        if(request.status == 401)
-        {
-          onReturn(window.alert("401 - Credentials Incorrect"));
+          SelectPopup sp = new SelectPopup();
+          sp.popupError("details-incorrect", "#popUpDiv");
         }
       }  
+    });
+  }
+  
+  void getResponse()
+  {
+    sendRequest().listen((ProgressEvent e)
+    {
+      if(request.readyState == 4)
+      {
+        if(request.status == 200)
+        {
+          if(request.responseText.contains("listProjects"))
+          {  
+            setProjectList();
+          }  
+          else if(request.responseText.contains("listRegistryEntriesFor"))
+          {
+            setRegistryList();
+          } 
+          else if(request.responseText.contains("removeRegistryEntry"))
+          {
+          }
+          else if(request.responseText.contains("addRegistryEntry")){}
+          else if(request.responseText.contains("registryEntryExists")){}
+        }
+        else
+        {
+          SelectPopup sp = new SelectPopup();
+          sp.popupXmlResponse(request.responseText, "#popUpDiv");
+        }
+      }
     });
   }
   
@@ -77,14 +112,25 @@ class SoapRequest
     return arguments.length;
   }
   
-  Stream<ProgressEvent> sendRequest()
+  Stream<ProgressEvent> sendLoginRequest()
   {
     String uriv = uri();
     request.open("POST", uriv);
     setHeaders();
     setXml();
     request.send(buffer.toString());
-    window.alert(buffer.toString());
+    return request.onReadyStateChange;
+  }
+  
+  Stream<ProgressEvent> sendRequest()
+  {
+    String uriv = uri();
+    request.open("POST", uriv);
+    request.setRequestHeader("accept", "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
+    request.setRequestHeader('Content-Type', 'text/xml');
+    request.setRequestHeader("Authorization", "Basic "+window.sessionStorage['credentials']);
+    setXml();
+    request.send(buffer.toString());
     return request.onReadyStateChange;
   }
   
@@ -95,11 +141,10 @@ class SoapRequest
   
   void setHeaders()
   {
-     window.alert("Basic "+encodeCredentials());
-     request.setRequestHeader("accept", "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
-     request.setRequestHeader('Content-Type', 'text/xml');
-     request.setRequestHeader("Authorization", "Basic "+encodeCredentials());
-     request.setRequestHeader("soapaction", "http://service.viperdb.decsim.com/DatabaseService/count");
+    request.setRequestHeader("accept", "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
+    request.setRequestHeader('Content-Type', 'text/xml');
+    request.setRequestHeader("Authorization", "Basic "+encodeCredentials());
+    request.setRequestHeader("soapaction", "http://"+namespace()+"/"+path());
   }
   
   void setPassword(String p)
@@ -119,15 +164,9 @@ class SoapRequest
     writeXmlFooter();
   }
   
-  String uri()
-  {
-    return window.location.protocol+"//"+window.location.host+"/DatabaseService/j_security_check";
-  }
-  
   void writeRequestArgument(int i)
   {
-    buffer.writeln("<args"+i.toString()+">"+getArgument(i)+"</arg"+i.toString()+">");
-    window.alert("<args"+i.toString()+">"+getArgument(i)+"</arg"+i.toString()+">");
+    buffer.writeln("<arg"+i.toString()+">"+getArgument(i)+"</arg"+i.toString()+">");
   }
   
   void writeRequestArguments()
@@ -140,8 +179,7 @@ class SoapRequest
   
   void writeXmlBody()
   {
-    window.alert("Action: "+getAction());
-    buffer.writeln("<ns2:"+getAction()+" xmlns:ns2='http://service.viperdb.decsim.com/'>");
+    buffer.writeln("<ns2:"+getAction()+" xmlns:ns2='http://"+namespace()+"/'>");
     writeRequestArguments();
     buffer.writeln("</ns2:"+getAction()+">");
   }
@@ -170,6 +208,123 @@ class SoapRequest
     body = envelope.nodes[0];
     response = body.nodes[0];
     return response.text;
+  }
+  
+  String namespace()
+  {
+    return "";
+  }
+  
+  String packageName()
+  {
+    return host()+"/"+path();
+  }
+  
+  String host()
+  {
+    return _host;
+  }
+  
+  String path()
+  {
+    return "";
+  }
+  
+  String uri()
+  {
+    return "http://"+packageName();
+  }
+  
+  setHost(String h)
+  {
+    _host = h;
+  }
+  
+  static List parse(String startTag, String endTag, String text) 
+  {
+    List<String> projects = new List<String>();
+    List projs = text.split(startTag);
+      for(int i = 0; i< projs.length; i++) 
+      {
+         if(projs.elementAt(i) != null && projs.elementAt(i).length > 0 && projs.elementAt(i).contains(endTag)) 
+         {
+           int index = projs.elementAt(i).indexOf(endTag);
+           String project = projs.elementAt(i).substring(0, index);
+           projects.add(project);
+         }
+         else
+         {
+           projs.remove(i);
+         }
+      }
+      return projects;
+   }
+  
+  static List parseRegistries(String startTag, String endTag, String startTag2, String endTag2, String text)
+  {
+    List<String> registriesListTrim1 = new List<String>();
+    List<String> registriesListTrim2 = new List<String>();
+    List<String> registriesFinalList = new List<String>();
+    List registries = text.split(startTag);
+    for(int i = 0; i < registries.length; i++)
+    {
+      if(registries.elementAt(i) != null && registries.elementAt(i).length > 0 && registries.elementAt(i).contains(endTag))
+      {
+        int index = registries.elementAt(i).indexOf(endTag);
+        String reg = registries.elementAt(i).substring(0, index);
+        registriesListTrim1.add(reg);
+      }
+      else
+      {
+        registries.remove(i);
+      }
+    }
+    for(int i2 = 0; i2 < registriesListTrim1.length; i2++)
+    {
+      List someRegistry = registriesListTrim1[i2].split(startTag2);
+      for(int i3 = 0; i3 < someRegistry.length; i3++)
+      {
+        if(someRegistry[i3].trim() != "")
+        {
+          registriesListTrim2.add(someRegistry[i3]);
+        }
+        else
+        {
+          someRegistry.remove(i3);
+        }
+      }
+    }
+    for(int i4 = 0; i4 < registriesListTrim2.length; i4++)
+    {
+      int index = registriesListTrim2.elementAt(i4).indexOf(endTag2);
+      String reg = registriesListTrim2.elementAt(i4).substring(11, index);
+      registriesFinalList.add(reg);
+    }
+    return registriesFinalList;
+  }
+  
+  setProjectList()
+  {
+    String response = request.responseText;
+    List projects = parse("<return>", "</return>", response);
+    LoadScreenElements.getProjects(projects);
+  }
+  
+  setRegistryList()
+  {
+    if(request.responseText.contains("<item>"))
+    {
+      String response = request.responseText;
+      List registryEntries = parseRegistries("<return>", "</return>", "<item>", "</item>", response);
+      LoadScreenElements.getRegistryEntries(registryEntries);
+    }
+    else
+    {
+      SelectPopup p = new SelectPopup();
+      PopupWindow puw = new PopupWindow();
+      querySelector("#dismissFinal").onClick.listen(puw.dismissPrompt);
+      p.popupError("no-registries", "#popUpDiv");
+    }
   }
 } 
   

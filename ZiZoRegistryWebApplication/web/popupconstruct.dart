@@ -28,17 +28,19 @@ class PopupWindow
     return new Rectangle(0, 0, 0, viewportHeight);
   }
   
-  void buttons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool clipboard)
+  void hideButtons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool clipboard)
   {
     ButtonElement button1 = querySelector("#no");
     ButtonElement button2 = querySelector("#yes");
     ButtonElement button3 = querySelector("#dismissFinal");
     ButtonElement button4 = querySelector("#clipboard");
+
     
     button1.hidden = dismissFail;
     button2.hidden = dismissSuccess;
     button3.hidden = dismissFinal;
     button4.hidden = clipboard; 
+
   }
   
   void dismiss(String popupId)
@@ -71,7 +73,7 @@ class PopupWindow
     el.style.display = "none";   
   }
   
-  void popup(String popupId)
+  popup(String popupId)
   {
     blanketSize(popupId);
     windowPosition(popupId);
@@ -129,6 +131,66 @@ class PopupWindow
       OutputElement text = querySelector("#popupText");
       text.innerHtml = description;
     }
+    if(option == "no-registries")
+    {
+      title = "Error";
+      description = "The Project "+"'"+window.sessionStorage['project']+"'"+
+          " Does Not Contain Any Registries, Please Select Another";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement server = querySelector("#serverResponse");
+      server.innerHtml = "";
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "add-registry")
+    {
+      title = "Add Registry Entry";
+      description = "Please Type The Name Of The Registry Entry You Wish To Create";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement server = querySelector("#serverResponse");
+      server.innerHtml = "";
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "list-files")
+    {
+      title = "Delete Entries?";
+      querySelector("#popupTitle").innerHtml = title;
+    }
+    if(option == "delete-success")
+    {
+      title = "Delete Completed";
+      description = "The Registry Entrties Were Successfully Deleted";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+  }
+  
+  void setList(List filesForDeletion)
+  {
+    OutputElement text = querySelector("#popupText");
+    String endList = "";
+    String currentText;
+    int num = 1;
+    for(int i = 0; i < filesForDeletion.length; i++)
+    {
+      currentText = "Key "+num.toString()+": "+filesForDeletion[i]+" ";
+      endList = endList+currentText;
+      num++;
+    }
+    text.innerHtml = endList;
+  }
+  
+  void setXmlResponse(String response)
+  {
+    String title = "Response";
+    String description = "The Server Responds With: ";
+    OutputElement server = querySelector("#serverResponse");
+    querySelector("#popupTitle").innerHtml = title;
+    server.innerHtml = response;
+    OutputElement text = querySelector("#popupText");
+    text.innerHtml = description;  
   }
   
   void show(div_id)

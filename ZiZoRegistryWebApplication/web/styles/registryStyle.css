@@ -1,5 +1,42 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+#loginDetailsDiv
+{
+  position: relative;
+  height: 6em;
+  width: 18em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#buttonDiv
+{
+  width: 200px;
+  height: 2em;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#comboboxDiv
+{
+  position: relative;
+  top: 7em;
+  margin-left: 0em;
+  margin-right: auto;
+  width: 23em;
+  height: 2em;
+}
+
+#helpParagraphs
+{
+  color: white;
+  text-shadow: 1px 1px #000000;
+  position: relative;
+  left: 10px;
+  margin-right: 5%;
+}
+
 body
 {
   background-color: #9f94ba;
@@ -31,7 +68,8 @@ h3
   left: 0px;
   top: 0px;
   width: 100%;
-  min-height: 12%;
+  min-height: 7em;
+  max-height: 7em;
   z-index: -1;
 }
 
@@ -40,8 +78,6 @@ h3
   position: absolute;
   left: 150px;
   top: 0px;
-  height: auto;
-  width: auto;
 }
 
 #bottomPage
@@ -50,40 +86,46 @@ h3
   bottom: 0px;
   left: 0px;
   width: 100%;
-  min-height: 12%;
+  min-height: 7em;
+  max-height: 7em;
 }
 
 #loginDiv
 {
   width: 35em;
-  height: 35em;
-  position: absolute;
-  top: 10em;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 20em;
+  position: relative;
+  top: 15em;
+  bottom: auto;
   margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #loginForm
 {
-  position: fixed;
+  position: absolute;
   margin: 0;
   padding: 0;
   width: 35em;
+  height: 100%;
 }
 
 #version
 {
-  position: fixed;
-  top: 85%;
-  right: 94.5%;
   color: #ffffff; 
   font-family: 'Lato', sans-serif; 
   font-size: 10px; 
   font-weight: 300; 
   text-shadow: 1px 1px #000000;
   text-align: center;
+}
+
+#versionDiv
+{
+  position: fixed;
+  top: 50em;
+  left: 2em;
 }
 
 #projectTextbox
@@ -103,47 +145,46 @@ h3
 
 #usernameTextbox
 {
-  position: fixed;
+  position: absolute;
   height: 25px;
-  width: 12.5em;
-  margin-left: 16em;
+  margin-left: 50%;
+  width: 11em;
 }
 #usernameLabel
 {
   color: white;
   text-shadow: 1px 1px #000000;
-  position:fixed;	
-  margin-left: 7em;
+  position: absolute;	
+  margin-left: 4%;
 }
 
 #passwordTextbox
 {
-  position: fixed;
+  position: absolute;
   height: 25px;
-  width: 12.5em;
-  margin-left: 16em;
+  width: 11em;
+  margin-left: 50%;
 }
 
 #passwordLabel
 {
   color: white;
   text-shadow: 1px 1px #000000;
-  position: fixed;
-  margin-left: 7.65em;
+  position: absolute;
+  margin-left: 7.75%;
 }
 
 #resetButton
 {
-  position: fixed;
-  margin-left: 13.1em;
-  width: 6em;
+  position: absolute;
+  width: 50%;
 }
 
 #submitButton
-{	
-  position: fixed;
-  margin-left: 19.2em;
-  width: 6em;
+{
+  position: absolute;
+  margin-left: 50%;
+  width: 50%;
 }
 
 .loginButtons
@@ -169,7 +210,9 @@ h3
 {
   position: relative;
   width: 100%;
+  min-width: 100%;
   min-height: 13%;
+  max-height: 45px;
   font-size: 16px;
   font-family: Tahoma, Geneva, sans-serif;
   color: #f0ffff;
@@ -178,8 +221,10 @@ h3
   text-shadow: 3px 2px 3px #333333;
   background-color: #5C5CD7;
   border-radius: 8px;
-  top: 6.67em;
+  top: 6.67em;  
 }
+
+
 
 #menu ul 
 {
@@ -190,33 +235,31 @@ h3
 
 #menu li 
 { 
-  display: inline; 
-  padding-left: 0em;
-  padding-right: 0em;
-  margin-left: 12em;
-  margin-right: 12em;
+  width: 25%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #menu a 
 {
   text-decoration: none;
   color: #fffff;
-  padding: 8px 8px 8px 8px;
+  padding:8px 8px 8px 8px;
 }
 
 #menu a:hover 
 {
   color: #F90;
   background-color: #FFF;
-  
 }
 
 #registryTableDiv
 {
-  position: relative;
+  position: absolute;
   overflow: auto;
-  height: 100%;
-  top: 0;
+  height: 60%;
+  top: 3em;
   bottom: 0;
   left: 0;
   right: 0;
@@ -249,56 +292,67 @@ td
 #projectDropDown
 {
   position: relative;
-  top: 11em;
-  left: 12em;
+  margin-left: 10em;
+  height: 18px;
+  min-width: 20%;
+  top: 2px;
 }
 
 #comboBoxLabel
 {
   color: white;
   text-shadow: 1px 1px #000000;
-  position:fixed;
-  top: 11.40em;	
-  left: 2em;
+  position: absolute;
 }
 
 #pageLayout
 {
   position: relative;
-  top: 7em;
-  width: 70em;
-  height: 20em;
+  top: 7.5em; 
+  width: 55%;
+  height: 22em;
+  max-height: 28em;
+  min-height: 10em;
   bottom: auto;
-  left: auto;
-  right: auto;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 47em;
+}
+
+#editButton
+{
+  position: absolute;
+  height: 2em;
+  width: 10%;
+  margin-left: 80%;
+  top: 90%
 }
 
 #deleteButton
 {
-  position: fixed;
-  top: 41.5em;
-  margin-left: 58em;
-  width: 6.5%;
+  position: absolute;
+  margin-left: 90%;
+  width: 10%;
   height: 2em;
+  top: 90%;
 }
 
 #addButton
 {
-  position: fixed;
-  top: 41.5em;
-  margin-left: 66.5em;
-  width: 6.5%;
+  position: absolute;
+  margin-left: 70%;
+  width: 10%;
   height: 2em;
+  top: 90%;
 }
 
 #searchButton
 {
-  position: fixed;
-  top: 11.9em;
-  margin-left: 11em;
-  width: 10%;
-  height: 1.9em;
+  position: absolute;
+  margin-left: 1em;
+  width: 35%;
+  max-width: 35%;
+  min-width: 35%;
 }
 
 #loggedInUserLabel
@@ -306,8 +360,8 @@ td
   color: white;
   text-shadow: 1px 1px #000000;
   position: fixed;
-  left: 2%;
-  top: 80%;
+  margin-left: 0em;
+  top: 77%;
 }
 
 a

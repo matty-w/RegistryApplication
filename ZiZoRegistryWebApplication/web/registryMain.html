@@ -18,20 +18,20 @@
     
     <div id="menu">
     <ul>
-    <li id="homePage"><a>Home</a></li>
-    <li id="helpButton"><a>Help</a></li>
-    <li id="logOut"><a>Logout</a></li>
+    <div id="menuItems">
+    <li id="homePage"><a id="homePageButton">Home</a></li>
+    <li id="helpButton"><a id="helpPageButton">Help</a></li>
+    <li id="logOut"><a id="logoutButton">Logout</a></li>
+    </div>
     </ul>
     </div>
     
+    <div id = "comboboxDiv">
     <label id="comboBoxLabel" for="projectDropDown">Project Selected:</label>
-    <input type="text" list=projects id="projectDropDown">
-      <datalist id="projects" >
-        <option>ViperDb</option>
-        <option>registryTable</option>
-        <option>Table Off</option>
-      </datalist>
-      <button id="searchButton" type="button" class="loginButtons">Return Registries</button>
+    <select type="text" id="projectDropDown">
+    </select>
+      <button id="searchButton" type="button" class="loginButtons">Search</button>
+    </div>  
       
     <div id="blanket" style="display:none"></div>
       <div id="popUpDiv" style="display:none">
@@ -53,21 +53,11 @@
         <h3 id="registrySubTitle">Select The Registry Files You Wish To Edit Below:</h3>
           <div id="registryTableDiv">
             <table id="registryTable" hidden>
-              <tr>
-                <th></th>
-                <th>File Name:</th>
-                <th>File Path:</th>
-                <th>Time Stamp:</th>
-              </tr>
-              <tr>
-                <td><input type="checkbox" id="checkbox" /></td>
-                <td>someRegistry.registry</td>
-                <td>C://Users/Data/Projects</td>
-                <td>08-07-15 09:40:50</td>
             </table>
-            <button id="deleteButton" type="button" class="loginButtons">Delete</button>
-            <button id="addButton" type="button" class="loginButtons">Add</button>
           </div>
+            <button id="deleteButton" type="button" class="loginButtons">Delete</button>
+            <button id="editButton" type="button" class="loginButtons">Edit</button>
+            <button id="addButton" type="button" class="loginButtons">Add</button>
         </div>
         
         

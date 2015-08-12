@@ -25,10 +25,8 @@ class NavigationFunctions
   {
     InputElement username = querySelector("#usernameTextbox");
     InputElement password = querySelector("#passwordTextbox");
-    InputElement project =  querySelector("#projectTextbox");
     local['username'] = username.value;
     local['password'] = password.value;
-    local['project'] = project.value;
     
     if(username.value == null || username.value.trim() == "")
     {
@@ -40,7 +38,7 @@ class NavigationFunctions
       sp.popupError("no-password", "#popUpDiv");
       return;
     }
-    ServerRequest.login(username.value, password.value, goToPage, presentErrorPopup);
+    ServerRequest.login(username.value, password.value,ServerRequest.defaultUri(), goToPage, presentErrorPopup);
   }
   
   void logout(MouseEvent m)
@@ -57,5 +55,5 @@ class NavigationFunctions
     local['username'] = "";
     local['password'] = "";
     sp.popupError("details-incorrect", "#popUpDiv");
-  } 
+  }
 }
