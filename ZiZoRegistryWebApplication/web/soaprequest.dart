@@ -5,7 +5,8 @@ import 'dart:async';
 import 'navigationfunctions.dart';
 import 'popupselection.dart';
 import 'popupconstruct.dart';
-import 'loadscreenelements.dart';
+import 'parseresponse.dart';
+import 'setelementvalues.dart';
 
 class SoapRequest
 {
@@ -239,75 +240,12 @@ class SoapRequest
   {
     _host = h;
   }
-  
-  static List parse(String startTag, String endTag, String text) 
-  {
-    List<String> projects = new List<String>();
-    List projs = text.split(startTag);
-      for(int i = 0; i< projs.length; i++) 
-      {
-         if(projs.elementAt(i) != null && projs.elementAt(i).length > 0 && projs.elementAt(i).contains(endTag)) 
-         {
-           int index = projs.elementAt(i).indexOf(endTag);
-           String project = projs.elementAt(i).substring(0, index);
-           projects.add(project);
-         }
-         else
-         {
-           projs.remove(i);
-         }
-      }
-      return projects;
-   }
-  
-  static List parseRegistries(String startTag, String endTag, String startTag2, String endTag2, String text)
-  {
-    List<String> registriesListTrim1 = new List<String>();
-    List<String> registriesListTrim2 = new List<String>();
-    List<String> registriesFinalList = new List<String>();
-    List registries = text.split(startTag);
-    for(int i = 0; i < registries.length; i++)
-    {
-      if(registries.elementAt(i) != null && registries.elementAt(i).length > 0 && registries.elementAt(i).contains(endTag))
-      {
-        int index = registries.elementAt(i).indexOf(endTag);
-        String reg = registries.elementAt(i).substring(0, index);
-        registriesListTrim1.add(reg);
-      }
-      else
-      {
-        registries.remove(i);
-      }
-    }
-    for(int i2 = 0; i2 < registriesListTrim1.length; i2++)
-    {
-      List someRegistry = registriesListTrim1[i2].split(startTag2);
-      for(int i3 = 0; i3 < someRegistry.length; i3++)
-      {
-        if(someRegistry[i3].trim() != "")
-        {
-          registriesListTrim2.add(someRegistry[i3]);
-        }
-        else
-        {
-          someRegistry.remove(i3);
-        }
-      }
-    }
-    for(int i4 = 0; i4 < registriesListTrim2.length; i4++)
-    {
-      int index = registriesListTrim2.elementAt(i4).indexOf(endTag2);
-      String reg = registriesListTrim2.elementAt(i4).substring(11, index);
-      registriesFinalList.add(reg);
-    }
-    return registriesFinalList;
-  }
-  
+    
   setProjectList()
   {
     String response = request.responseText;
-    List projects = parse("<return>", "</return>", response);
-    LoadScreenElements.getProjects(projects);
+    List projects = ParseResponse.parse("<return>", "</return>", response);
+    SetElementValues.getProjects(projects);
   }
   
   setRegistryList()
@@ -315,8 +253,8 @@ class SoapRequest
     if(request.responseText.contains("<item>"))
     {
       String response = request.responseText;
-      List registryEntries = parseRegistries("<return>", "</return>", "<item>", "</item>", response);
-      LoadScreenElements.getRegistryEntries(registryEntries);
+      List registryEntries = ParseResponse.parseRegistries("<return>", "</return>", "<item>", "</item>", response);
+      SetElementValues.getRegistryEntries(registryEntries);
     }
     else
     {

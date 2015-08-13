@@ -1,7 +1,6 @@
 library selectPopup;
 
 import 'popupconstruct.dart';
-import 'dart:html';
 
 class SelectPopup
 {
@@ -31,16 +30,7 @@ class SelectPopup
     p.hideButtons(true, true, false, true);
     p.popup(popupId);
   }
-  
-  popupAddRegistryEntry(String option, String popupId)
-  {
-    PopupWindow p = new PopupWindow();
-    p.setText(option);
-    p.setErrorPicture(true);
-    p.hideButtons(true, true, true, true);
-    p.popup(popupId);
-  }
-  
+    
   popupListFilesForDeletion(String option, List deletionFiles, String popupId)
   {
     PopupWindow p = new PopupWindow();

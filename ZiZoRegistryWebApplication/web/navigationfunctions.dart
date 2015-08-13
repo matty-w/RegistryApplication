@@ -44,6 +44,17 @@ class NavigationFunctions
   void logout(MouseEvent m)
   {
     Storage local = window.sessionStorage;
+    TableElement table = querySelector("#registryTable");
+    SelectElement select = querySelector("#projectDropDown");
+    int tableLength = table.rows.length;
+    select.remove();
+    if(tableLength > 0)
+    {
+      for(int i = 0; table.rows.length > 0; i++)
+      {
+        table.deleteRow(0);
+      }
+    }  
     local['username'] = "";
     local['password'] = "";
     local['project'] = "";

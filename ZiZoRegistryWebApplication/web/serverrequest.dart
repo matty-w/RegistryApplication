@@ -47,9 +47,15 @@ class ServerRequest extends SoapRequest
     result.getResponse(); 
   }
   
-  static void addRegistryFile()
+  static void addRegistryFile(String username, String password, String key, String path, String host)
   {
-    
+    ServerRequest result;
+    result = new ServerRequest();
+    result.setHost(host);
+    result.setAction("addRegistryEntry");
+    result.addArgument(key);
+    result.addArgument(path);
+    result.getResponse();
   }
   
   @override
