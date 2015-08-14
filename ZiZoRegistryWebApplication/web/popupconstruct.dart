@@ -135,7 +135,7 @@ class PopupWindow
     {
       title = "Error";
       description = "The Project "+"'"+window.sessionStorage['project']+"'"+
-          " Does Not Contain Any Registries, Please Select Another";
+          " Does Not Contain Any Registries, Please Select Another.";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement server = querySelector("#serverResponse");
       server.innerHtml = "";
@@ -145,7 +145,7 @@ class PopupWindow
     if(option == "add-registry")
     {
       title = "Add Registry Entry";
-      description = "Please Type The Name Of The Registry Entry You Wish To Create";
+      description = "Please Type The Name Of The Registry Entry You Wish To Create.";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement server = querySelector("#serverResponse");
       server.innerHtml = "";
@@ -160,7 +160,15 @@ class PopupWindow
     if(option == "delete-success")
     {
       title = "Delete Completed";
-      description = "The Registry Entrties Were Successfully Deleted";
+      description = "The Registry Entrties Were Successfully Deleted.";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "no-entries-selected")
+    {
+      title = "Error";
+      description = "You Haven't Selected Any Registries For Deletion, Please Select At Least One And Try Again.";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement text = querySelector("#popupText");
       text.innerHtml = description;

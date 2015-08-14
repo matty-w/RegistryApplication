@@ -4,7 +4,6 @@ import 'dart:html';
 import 'serverrequest.dart';
 import 'popupselection.dart';
 import 'setelementvalues.dart';
-import 'listentobuttons.dart';
 
 class ServerFunctions
 {
@@ -23,6 +22,11 @@ class ServerFunctions
   void deleteButton(MouseEvent m)
   {
     List catalogueKeys = SetElementValues.deleteKeys();
+    if(catalogueKeys.length == 0 || catalogueKeys == null)
+    {
+      SelectPopup sp = new SelectPopup();
+      sp.popupError("no-entries-selected", "#popUpDiv");
+    }
     if(catalogueKeys.length > 0)
     {  
       SelectPopup sp = new SelectPopup();

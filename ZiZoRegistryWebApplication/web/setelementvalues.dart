@@ -27,13 +27,12 @@ class SetElementValues
     TableElement table = querySelector("#registryTable");
     for(int i = 0; i < registries.length; i++)
     {
-      registryNames.add(registries[i]);
-      i++;
-    }
-    for(int i1 = 1; i1 < registries.length; i1++)
-    {
-      registryPaths.add(registries[i1]);
-      i1++;
+      if(!(registries[i].toString().indexOf(".", registries[i].toString().indexOf(".") + 1) != -1) && i.isEven)
+      {
+        registryNames.add(registries[i]);
+        registryPaths.add(registries[i+1]);
+        i++;
+      }
     }
     for(int i2 = 0; i2 < registryNames.length; i2++)
     {
