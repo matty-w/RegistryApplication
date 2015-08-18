@@ -30,12 +30,12 @@ class NavigationFunctions
     
     if(username.value == null || username.value.trim() == "")
     {
-      sp.popupError("no-username", "#popUpDiv");
+      sp.popup("no-username", false, true, false, true, true, false, true, "#popUpDiv");
       return;
     }
     if(password.value == null || password.value.trim() == "")
     {
-      sp.popupError("no-password", "#popUpDiv");
+      sp.popup("no-password", false, true, false, true, true, false, true, "#popUpDiv");
       return;
     }
     ServerRequest.login(username.value, password.value,ServerRequest.defaultUri(), goToPage, presentErrorPopup);
@@ -43,7 +43,6 @@ class NavigationFunctions
   
   void logout(MouseEvent m)
   {
-    Storage local = window.sessionStorage;
     TableElement table = querySelector("#registryTable");
     SelectElement select = querySelector("#projectDropDown");
     int tableLength = table.rows.length;
@@ -65,6 +64,6 @@ class NavigationFunctions
   {
     local['username'] = "";
     local['password'] = "";
-    sp.popupError("details-incorrect", "#popUpDiv");
+    sp.popup("details-incorrect", false, true, false, true, true, false, true, "#popUpDiv");
   }
 }

@@ -7,16 +7,18 @@ import 'setelementvalues.dart';
 
 class ServerFunctions
 {
+  SelectPopup sp = new SelectPopup();
+  
   void completeDeletion(MouseEvent m)
   {
     List catalogueKeys = SetElementValues.deleteKeys();
-    SelectPopup sp = new SelectPopup();
+
     for(int i = 0; i < catalogueKeys.length; i++)
     {
       ServerRequest.deleteRegistryFile(window.sessionStorage['username'],window.sessionStorage['password']
                                       , catalogueKeys[i], ServerRequest.defaultUri());
     }
-    sp.popupSuccess("delete-success", "#popUpDiv");
+    sp.popup("delete-success", false, false, false, true, true, false, true, "#popUpDiv");
   }
   
   void deleteButton(MouseEvent m)
@@ -24,14 +26,17 @@ class ServerFunctions
     List catalogueKeys = SetElementValues.deleteKeys();
     if(catalogueKeys.length == 0 || catalogueKeys == null)
     {
-      SelectPopup sp = new SelectPopup();
-      sp.popupError("no-entries-selected", "#popUpDiv");
+      sp.popup("no-entries-selected", false, true, false, true, true, false, true, "#popUpDiv");
     }
     if(catalogueKeys.length > 0)
     {  
-      SelectPopup sp = new SelectPopup();
       sp.popupListFilesForDeletion("list-files", catalogueKeys, "#popUpDiv");
     }
+  }
+  
+  void addButton(MouseEvent m)
+  {
+    sp.popup("add-registry", true, false, true, true, true, false, false, "#popUpDiv");
   }
   
   void listenToBox(MouseEvent m)

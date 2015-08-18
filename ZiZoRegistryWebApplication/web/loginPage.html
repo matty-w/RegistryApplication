@@ -18,12 +18,18 @@
   <div id="blanket" style="display:none"></div>
     <div id="popUpDiv" style="display:none">
       <br>
+      <br id="addBreak" hidden>
       <img id = "tick" src = "images/ticksmall.png"/>
       <h2 id = "popupTitle">Licence Created</h2>
+      <div align="center">
+      <label id="addLabel1" style="display: none">Registry Key:</label><input id="text" type="text" style="display: none">
+      <br id="break" hidden>
+      <label id="addLabel2" style="display: none">Content Path:</label><select id="select" type="text" style="display: none"></select>
+      </div>
       <p id = "popupParagraph"><output id = "popupText"></output><output id = "serverResponse"></output><p>
       <div align="center">
       <button id = "dismissFinal" class = "dismissButton">Dismiss</button>
-      <button id = "clipboard" class = "popupButtons">Copy To Clipboard</button>
+      <button id = "addRegistry" class = "popupButtons">Copy To Clipboard</button>
       <button id = "no" class = "dismissButton">No</button>
       <button id = "yes" class = "popupButtons">Yes</button>
       </div>
@@ -48,7 +54,7 @@
     </form>
   </div>
   <div id="versionDiv">
-  <text id = "version">Version: 2.6.2</text>
+  <text id = "version">Version: 2.8.0</text>
   </div>   
 
 

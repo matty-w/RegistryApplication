@@ -4,36 +4,25 @@ import 'popupconstruct.dart';
 
 class SelectPopup
 {
-  popupSuccess(String option, String popupId)
-  {
-    PopupWindow p = new PopupWindow();
-    p.setText(option);
-    p.setErrorPicture(false);
-    p.hideButtons(true, true, false, true);
-    p.popup(popupId);
-  }
+  PopupWindow p = new PopupWindow();
   
-  popupError(String option, String popupId)
+  popup(String option, bool removePictures, bool setErrorPicture, bool setTextboxes, bool hideDismissFail,
+      bool hideDismissSuccess, bool hideDismissFinal, bool hideAddRegistry,String popupId)
   {
-    PopupWindow p = new PopupWindow();
     p.setText(option);
-    p.setErrorPicture(true);
-    p.hideButtons(true, true, false, true);
+    p.removePictures(removePictures);
+    if(removePictures == false)
+    {
+      p.setErrorPicture(setErrorPicture);
+    }
+    p.setTextboxes(setTextboxes);
+    p.hideButtons(hideDismissFail, hideDismissSuccess, hideDismissFinal, hideAddRegistry);
     p.popup(popupId);
-  }
-  
-  popupXmlResponse(String response, String popupId)
-  {
-    PopupWindow p = new PopupWindow();
-    p.setXmlResponse(response);
-    p.setErrorPicture(true);
-    p.hideButtons(true, true, false, true);
-    p.popup(popupId);
-  }
     
+  }
+        
   popupListFilesForDeletion(String option, List deletionFiles, String popupId)
   {
-    PopupWindow p = new PopupWindow();
     p.setText(option);
     p.setList(deletionFiles);
     p.setErrorPicture(true);

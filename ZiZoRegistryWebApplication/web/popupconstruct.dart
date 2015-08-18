@@ -28,18 +28,17 @@ class PopupWindow
     return new Rectangle(0, 0, 0, viewportHeight);
   }
   
-  void hideButtons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool clipboard)
+  void hideButtons(bool dismissFail, bool dismissSuccess, bool dismissFinal, bool addRegistry)
   {
     ButtonElement button1 = querySelector("#no");
     ButtonElement button2 = querySelector("#yes");
     ButtonElement button3 = querySelector("#dismissFinal");
-    ButtonElement button4 = querySelector("#clipboard");
+    ButtonElement button4 = querySelector("#addRegistry");
 
-    
     button1.hidden = dismissFail;
     button2.hidden = dismissSuccess;
     button3.hidden = dismissFinal;
-    button4.hidden = clipboard; 
+    button4.hidden = addRegistry; 
 
   }
   
@@ -51,6 +50,12 @@ class PopupWindow
   
   void dismissPrompt(MouseEvent e)
   {
+    querySelector("#break").hidden = true;
+    querySelector("#addBreak").hidden = true;
+    querySelector("#addLabel1").style.display = "none";
+    querySelector("#addLabel2").style.display = "none";
+    querySelector("#select").style.display = "none";
+    querySelector("#text").style.display = "none";
     dismiss("#popUpDiv");
   }
   
@@ -81,12 +86,43 @@ class PopupWindow
     show(popupId); 
   }
   
+  void setTextboxes(bool a)
+  {
+    if(a == false)
+    {
+      querySelector("#addBreak").hidden = true;
+      querySelector("#break").hidden = true;
+      querySelector("#addLabel1").style.display = "none";
+      querySelector("#addLabel2").style.display = "none";
+      querySelector("#select").style.display = "none";
+      querySelector("#text").style.display = "none";
+    }
+    else if(a == true)
+    {
+      querySelector("#addBreak").hidden = false;
+      querySelector("#break").hidden = false;
+      querySelector("#addRegistry").innerHtml = "Add Registry";
+      querySelector("#addLabel1").style.display = "inline-block";
+      querySelector("#addLabel2").style.display = "inline-block";
+      querySelector("#select").style.display = "inline-block";
+      querySelector("#text").style.display = "inline-block";
+    }
+  }
+  
   void setErrorPicture(bool a)
   {
     if(a == true)
       querySelector("#tick").setAttribute("src", "images/dialogWarning2.png");
     else
       querySelector("#tick").setAttribute("src", "images/ticksmall.png");
+  }
+  
+  void removePictures(bool a)
+  {
+    if(a == true)
+      querySelector("#tick").setAttribute("src", "");
+    else if(a == false)
+      return;
   }
   
   void setFailText(String title, String description)
@@ -145,12 +181,9 @@ class PopupWindow
     if(option == "add-registry")
     {
       title = "Add Registry Entry";
-      description = "Please Type The Name Of The Registry Entry You Wish To Create.";
       querySelector("#popupTitle").innerHtml = title;
-      OutputElement server = querySelector("#serverResponse");
-      server.innerHtml = "";
       OutputElement text = querySelector("#popupText");
-      text.innerHtml = description;
+      text.innerHtml = "";
     }
     if(option == "list-files")
     {
@@ -227,11 +260,3 @@ class PopupWindow
     return new Point(windowWidth, 0);
   }
 }
-  
-
-  
-
-  
-
-  
-

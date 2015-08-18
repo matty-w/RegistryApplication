@@ -61,7 +61,7 @@ class SoapRequest
         else
         {
           SelectPopup sp = new SelectPopup();
-          sp.popupError("details-incorrect", "#popUpDiv");
+          sp.popup("details-incorrect", false, true, false, true, true, false, true, "#popUpDiv");
         }
       }  
     });
@@ -92,7 +92,7 @@ class SoapRequest
         else
         {
           SelectPopup sp = new SelectPopup();
-          sp.popupXmlResponse(request.responseText, "#popUpDiv");
+          sp.popup(request.responseText, false, true, false, true, true, false, true, "#popUpDiv");
         }
       }
     });
@@ -261,7 +261,7 @@ class SoapRequest
       SelectPopup p = new SelectPopup();
       PopupWindow puw = new PopupWindow();
       querySelector("#dismissFinal").onClick.listen(puw.dismissPrompt);
-      p.popupError("no-registries", "#popUpDiv");
+      p.popup("details-incorrect", false, true, false, true, true, false, true, "#popUpDiv");
     }
   }
 } 

@@ -58,6 +58,17 @@ class ServerRequest extends SoapRequest
     result.getResponse();
   }
   
+  static void  editRegistryFile(String username, String password, String key, String path, String host)
+  {
+    ServerRequest result;
+    result = new ServerRequest();
+    result.setHost(host);
+    result.setAction("editRegistryFile");
+    result.addArgument(key);
+    result.addArgument(path);
+    result.getResponse();
+  }
+  
   @override
   namespace()
   {

@@ -8,18 +8,17 @@ import 'serverfunctions.dart';
 
 class ListenToButtons
 {
+  NavigationFunctions navigate = new NavigationFunctions();
+  PopupWindow p = new PopupWindow();
+  
   void listenToLoginButtons()
   {
-    PopupWindow p = new PopupWindow();
-    NavigationFunctions navigate = new NavigationFunctions();
     querySelector("#submitButton").onClick.listen(navigate.login);
     querySelector("#dismissFinal").onClick.listen(p.dismissPrompt);
   }
   
   void listenToRegistryButtons()
   {
-    PopupWindow p = new PopupWindow();
-    NavigationFunctions navigate = new NavigationFunctions();
     HelpScreen h = new HelpScreen();
     ServerFunctions sf = new ServerFunctions();
     querySelector("#homePageButton").onClick.listen(navigate.goToHomePage);
@@ -28,6 +27,7 @@ class ListenToButtons
     querySelector("#usernameOutput").innerHtml = window.sessionStorage['username'];
     querySelector("#searchButton").onClick.listen(sf.listenToBox);
     querySelector("#deleteButton").onClick.listen(sf.deleteButton);
+    querySelector("#addButton").onClick.listen(sf.addButton);
     querySelector("#no").onClick.listen(p.dismissPrompt);
     querySelector("#yes").onClick.listen(sf.completeDeletion);
     querySelector("#dismissFinal").onClick.listen(p.dismissPrompt);
