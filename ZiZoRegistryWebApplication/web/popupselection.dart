@@ -1,13 +1,14 @@
 library selectPopup;
 
 import 'popupconstruct.dart';
+import 'dart:html';
 
 class SelectPopup
 {
   PopupWindow p = new PopupWindow();
   
-  popup(String option, bool removePictures, bool setErrorPicture, bool setTextboxes, bool hideDismissFail,
-      bool hideDismissSuccess, bool hideDismissFinal, bool hideAddRegistry,String popupId)
+  popup(String option, bool removePictures, bool setErrorPicture, bool setTextbox, bool setSelectBox, bool hideBreaks,
+      bool hideDismissFail, bool hideDismissSuccess, bool hideDismissFinal, bool hideAddRegistry,String popupId)
   {
     p.setText(option);
     p.removePictures(removePictures);
@@ -15,10 +16,11 @@ class SelectPopup
     {
       p.setErrorPicture(setErrorPicture);
     }
-    p.setTextboxes(setTextboxes);
+    p.setKeyTextbox(setTextbox);
+    p.setSelectPathBox(setSelectBox);
+    p.hideBreaks(hideBreaks);
     p.hideButtons(hideDismissFail, hideDismissSuccess, hideDismissFinal, hideAddRegistry);
     p.popup(popupId);
-    
   }
         
   popupListFilesForDeletion(String option, List deletionFiles, String popupId)
@@ -28,5 +30,10 @@ class SelectPopup
     p.setErrorPicture(true);
     p.hideButtons(false, false, true, true);
     p.popup(popupId);
+  }
+  
+  popupEditRegistryEntry(String option)
+  {
+    
   }
 }

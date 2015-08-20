@@ -18,7 +18,20 @@ class ServerFunctions
       ServerRequest.deleteRegistryFile(window.sessionStorage['username'],window.sessionStorage['password']
                                       , catalogueKeys[i], ServerRequest.defaultUri());
     }
-    sp.popup("delete-success", false, false, false, true, true, false, true, "#popUpDiv");
+    sp.popup("delete-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+  }
+  
+  void completeTask(MouseEvent m)
+  {
+    InputElement text = querySelector("#addRegistry");
+    if(text.innerHtml == "Edit Registry")
+    {
+      sp.popup("edit-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+    }
+    else if(text.innerHtml == "Add Registry")
+    {
+      sp.popup("add-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+    }
   }
   
   void deleteButton(MouseEvent m)
@@ -26,7 +39,7 @@ class ServerFunctions
     List catalogueKeys = SetElementValues.deleteKeys();
     if(catalogueKeys.length == 0 || catalogueKeys == null)
     {
-      sp.popup("no-entries-selected", false, true, false, true, true, false, true, "#popUpDiv");
+      sp.popup("no-entries-selected", false, true, false, false, true, true, true, false, true, "#popUpDiv");
     }
     if(catalogueKeys.length > 0)
     {  
@@ -36,7 +49,12 @@ class ServerFunctions
   
   void addButton(MouseEvent m)
   {
-    sp.popup("add-registry", true, false, true, true, true, false, false, "#popUpDiv");
+    sp.popup("add-registry", true, false, true, true, false, true, true, false, false, "#popUpDiv");
+  }
+  
+  void editButton(MouseEvent m)
+  {
+    sp.popup("edit-registry", true, false, true, false, true, true, true, false, false, "#popUpDiv");
   }
   
   void listenToBox(MouseEvent m)

@@ -27,9 +27,12 @@ class ListenToButtons
     querySelector("#usernameOutput").innerHtml = window.sessionStorage['username'];
     querySelector("#searchButton").onClick.listen(sf.listenToBox);
     querySelector("#deleteButton").onClick.listen(sf.deleteButton);
+    querySelector("#editButton").onClick.listen(sf.editButton);
     querySelector("#addButton").onClick.listen(sf.addButton);
     querySelector("#no").onClick.listen(p.dismissPrompt);
     querySelector("#yes").onClick.listen(sf.completeDeletion);
     querySelector("#dismissFinal").onClick.listen(p.dismissPrompt);
+    
+    querySelector("#addRegistry").onClick.listen(sf.completeTask); 
   }
 }

@@ -83,7 +83,49 @@ class PopupWindow
     blanketSize(popupId);
     windowPosition(popupId);
     show('#blanket');
-    show(popupId); 
+    show(popupId);
+  }
+  
+  void hideBreaks(bool a)
+  {
+    if(a == true)
+    {
+      querySelector("#addBreak").hidden = true;
+      querySelector("#break").hidden = true;
+    }
+    else if(a == false)
+    {
+      querySelector("#addBreak").hidden = false;
+      querySelector("#break").hidden = false;
+    }
+  }
+  
+  void setKeyTextbox(bool a)
+  {
+    if(a == true)
+    {
+      querySelector("#addLabel1").style.display = "inline-block";
+      querySelector("#text").style.display = "inline-block";
+    }
+    else if(a == false)
+    {
+      querySelector("#addLabel1").style.display = "none";
+      querySelector("#text").style.display = "none";
+    }
+  }
+  
+  void setSelectPathBox(bool a)
+  {
+    if(a == true)
+    {
+      querySelector("#addLabel2").style.display = "inline-block";
+      querySelector("#select").style.display = "inline-block";
+    }
+    else if(a == false)
+    {
+      querySelector("#addLabel2").style.display = "none";
+      querySelector("#select").style.display = "none";
+    }
   }
   
   void setTextboxes(bool a)
@@ -180,7 +222,18 @@ class PopupWindow
     }
     if(option == "add-registry")
     {
+      InputElement buttonText = querySelector("#addRegistry");
+      buttonText.innerHtml = "Add Registry";
       title = "Add Registry Entry";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = "";
+    }
+    if(option == "edit-registry")
+    {
+      InputElement buttonText = querySelector("#addRegistry");
+      buttonText.innerHtml = "Edit Registry";
+      title = "Edit Registry Entry";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement text = querySelector("#popupText");
       text.innerHtml = "";
@@ -194,6 +247,22 @@ class PopupWindow
     {
       title = "Delete Completed";
       description = "The Registry Entrties Were Successfully Deleted.";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "add-success")
+    {
+      title = "Add Successful";
+      description = "The Entry Was Successfully Added";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "edit-success")
+    {
+      title = "Edit Succesful";
+      description = "The Entry Was Successfully Edited";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement text = querySelector("#popupText");
       text.innerHtml = description;

@@ -18,6 +18,7 @@ class SoapRequest
   HttpRequest request = new HttpRequest();
   String username;
   String _host;
+  SelectPopup sp = new SelectPopup();
 
   void addArgument(String arg)
   {
@@ -60,8 +61,7 @@ class SoapRequest
         }
         else
         {
-          SelectPopup sp = new SelectPopup();
-          sp.popup("details-incorrect", false, true, false, true, true, false, true, "#popUpDiv");
+          sp.popup("details-incorrect", false, true, false, false, true, true, true, false, true, "#popUpDiv");
         }
       }  
     });
@@ -92,7 +92,7 @@ class SoapRequest
         else
         {
           SelectPopup sp = new SelectPopup();
-          sp.popup(request.responseText, false, true, false, true, true, false, true, "#popUpDiv");
+          sp.popup(request.responseText, false, true, false, false, true, true, true, false, true, "#popUpDiv");
         }
       }
     });
@@ -258,10 +258,9 @@ class SoapRequest
     }
     else
     {
-      SelectPopup p = new SelectPopup();
       PopupWindow puw = new PopupWindow();
       querySelector("#dismissFinal").onClick.listen(puw.dismissPrompt);
-      p.popup("details-incorrect", false, true, false, true, true, false, true, "#popUpDiv");
+      sp.popup("no-registries", false, true, false, false, true, true, true, false, true, "#popUpDiv");
     }
   }
 } 
