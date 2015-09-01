@@ -8,6 +8,7 @@ class NavigationFunctions
 {
   StringBuffer buffer = new StringBuffer();
   Storage local = window.sessionStorage;
+  Storage saveProject = window.localStorage;
   HttpRequest request;
   SelectPopup sp = new SelectPopup();
  
@@ -53,7 +54,7 @@ class NavigationFunctions
       {
         table.deleteRow(0);
       }
-    }  
+    }
     local['username'] = "";
     local['password'] = "";
     local['project'] = "";

@@ -13,6 +13,7 @@ class SoapRequest
   String action;
   List<Object> arguments = new List();
   List<String> catalogueNames = new List();
+  List<String> projectNames = new List();
   StringBuffer buffer = new StringBuffer();
   String password;
   HttpRequest request = new HttpRequest();

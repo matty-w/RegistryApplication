@@ -100,17 +100,22 @@ class PopupWindow
     }
   }
   
+  //TODO
   void setKeyTextbox(bool a)
   {
     if(a == true)
     {
       querySelector("#addLabel1").style.display = "inline-block";
       querySelector("#text").style.display = "inline-block";
+      InputElement text = querySelector("#text");
+      text.value = window.sessionStorage['project'].toLowerCase();
     }
     else if(a == false)
     {
       querySelector("#addLabel1").style.display = "none";
       querySelector("#text").style.display = "none";
+      InputElement text = querySelector("#text");
+      text.value = "";
     }
   }
   

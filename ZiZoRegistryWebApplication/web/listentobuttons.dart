@@ -21,11 +21,12 @@ class ListenToButtons
   {
     HelpScreen h = new HelpScreen();
     ServerFunctions sf = new ServerFunctions();
+    window.onLoad.listen(sf.loadPreviousTable);
     querySelector("#homePageButton").onClick.listen(navigate.goToHomePage);
     querySelector("#helpPageButton").onClick.listen(h.showHelpPage);
     querySelector("#logoutButton").onClick.listen(navigate.logout);
     querySelector("#usernameOutput").innerHtml = window.sessionStorage['username'];
-    querySelector("#searchButton").onClick.listen(sf.listenToBox);
+    querySelector("#projectDropDown").onChange.listen(sf.listenToBox);
     querySelector("#deleteButton").onClick.listen(sf.deleteButton);
     querySelector("#editButton").onClick.listen(sf.editButton);
     querySelector("#addButton").onClick.listen(sf.addButton);

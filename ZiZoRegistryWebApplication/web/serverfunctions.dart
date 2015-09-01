@@ -71,8 +71,28 @@ class ServerFunctions
     }  
     InputElement selectedProject = querySelector("#projectDropDown");
     window.sessionStorage['project'] = selectedProject.value;
+    window.localStorage['project'] = window.sessionStorage['project'];
     ServerRequest.getRegistryFiles(window.sessionStorage['username'],window.sessionStorage['password']
                                    ,window.sessionStorage['project'], ServerRequest.defaultUri());
+  }
+  
+  void loadPreviousTable(Event e)
+  {
+    setProject();
+    ServerRequest.getRegistryFiles(window.sessionStorage['username'], window.sessionStorage['password']
+                                  , window.localStorage['project'], ServerRequest.defaultUri());
+  }
+  
+  void setProject()
+  {
+    SelectElement dropDown = querySelector("#projectDropDown");
+    for(int i = 0; i < dropDown.length; i++)
+    {
+      if(dropDown.options[i].text == window.localStorage['project'])
+      {
+        dropDown.options[i].selected = true;
+      }
+    }
   }
   
   void loadProjects(Event e)
