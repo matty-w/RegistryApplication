@@ -1,37 +1,39 @@
 library parseInterior;
 
+import 'dart:html';
+
 class ParseInterior
 {
-  static List splitTag(List registries, String startTag, String endTag)
+  static List splitTag(List list, String startTag, String endTag)
   {
-    List registryList = new List();
-    for(int i = 0; i < registries.length; i++)
+    List splitList = new List();
+    for(int i = 0; i < list.length; i++)
     {
-      if(registries.elementAt(i) != null && registries.elementAt(i).length > 0 && registries.elementAt(i).contains(endTag))
+      if(list.elementAt(i) != null && list.elementAt(i).length > 0 && list.elementAt(i).contains(endTag))
       {
-        int index = registries.elementAt(i).indexOf(endTag);
-        String reg = registries.elementAt(i).substring(0, index);
-        registryList.add(reg);
+        int index = list.elementAt(i).indexOf(endTag);
+        String reg = list.elementAt(i).substring(0, index);
+        splitList.add(reg);
       }
       else
       {
-        registries.remove(i);
+        splitList.remove(i);
       }
     }
-    return registryList;
+    return splitList;
   }
   
-  static List parseSecondTag(List registriesListTrim1, String startTag2)
+  static List parseSecondTag(List parsedList, String startTag2)
   {
-    List registryList = new List();
-    for(int i2 = 0; i2 < registriesListTrim1.length; i2++)
+    List list = new List();
+    for(int i2 = 0; i2 < parsedList.length; i2++)
     {
-      List someRegistry = registriesListTrim1[i2].split(startTag2);
+      List someRegistry = parsedList[i2].split(startTag2);
       for(int i3 = 0; i3 < someRegistry.length; i3++)
       {
         if(someRegistry[i3].trim() != "")
         {
-          registryList.add(someRegistry[i3]);
+          list.add(someRegistry[i3]);
         }
         else
         {
@@ -39,19 +41,47 @@ class ParseInterior
         }
       }
     }
-    return registryList;
+    return list;
   }
   
-  static List parseFinalRegistry(List registriesListTrim2, String endTag2)
+  static List parseFinalRegistry(List parsedList, String endTag2)
   {
-    List registryList = new List();
-    for(int i4 = 0; i4 < registriesListTrim2.length; i4++)
+    List list = new List();
+    for(int i = 0; i < parsedList.length; i++)
     {
-      int index = registriesListTrim2.elementAt(i4).indexOf(endTag2);
-      String reg = registriesListTrim2.elementAt(i4).substring(11, index);
-      registryList.add(reg);
+      int index = parsedList.elementAt(i).indexOf(endTag2);
+      String reg = parsedList.elementAt(i).substring(11, index);
+      list.add(reg);
     }
-    return registryList;
+    return list;
+  }
+  
+  static List parseFinalFolder(List parsedList, String endTag2)
+  {
+    List list = new List<String>();
+    for(int i = 0; i < parsedList.length; i++)
+    {
+      int index = parsedList.elementAt(i).indexOf(endTag2);
+      String folder = parsedList.elementAt(i).substring(0, index);
+      if(folder.contains("folder.name"))
+      {
+        String folderName = folder.substring(12);
+        list.add(folderName);
+      }
+    }
+    return list;
+  }
+  
+  static List parseFinalFile(List parsedList, String endTag2)
+  {
+    List list = new List<String>();
+    for(int i = 0; i < parsedList.length; i++)
+    {
+      int index = parsedList.elementAt(i).indexOf(endTag2);
+      String file = parsedList.elementAt(i).substring(0, index);
+      list.add(file);
+    }
+    return list;
   }
   
   static List parseProject(List projects, String endTag)

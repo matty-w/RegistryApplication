@@ -17,6 +17,11 @@ class NavigationFunctions
     window.location.href = "registryMain.html";
   }
   
+  void reloadPage(MouseEvent m)
+  {
+    window.location.reload();
+  }
+  
   void goToPage()
   {
     window.location.href = "registryMain.html";
@@ -31,12 +36,12 @@ class NavigationFunctions
     
     if(username.value == null || username.value.trim() == "")
     {
-      sp.popup("no-username", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("no-username", null, null, false, true, false, false, true, true, true, false, true, "#popUpDiv");
       return;
     }
     if(password.value == null || password.value.trim() == "")
     {
-      sp.popup("no-password", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("no-password", null, null, false, true, false, false, true, true, true, false, true, "#popUpDiv");
       return;
     }
     ServerRequest.login(username.value, password.value,ServerRequest.defaultUri(), goToPage, presentErrorPopup);
@@ -65,6 +70,6 @@ class NavigationFunctions
   {
     local['username'] = "";
     local['password'] = "";
-    sp.popup("details-incorrect", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+    sp.popup("details-incorrect", null, null, false, true, false, false, true, true, true, false, true, "#popUpDiv");
   }
 }

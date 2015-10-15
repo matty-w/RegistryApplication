@@ -14,6 +14,7 @@ class SoapRequest
   List<Object> arguments = new List();
   List<String> catalogueNames = new List();
   List<String> projectNames = new List();
+  Storage local = window.sessionStorage;
   StringBuffer buffer = new StringBuffer();
   String password;
   HttpRequest request = new HttpRequest();
@@ -62,9 +63,46 @@ class SoapRequest
         }
         else
         {
-          sp.popup("details-incorrect", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+          sp.popup("details-incorrect", null, null, false, true, false, false, true, true, true, false, 
+                    true, "#popUpDiv");
         }
       }  
+    });
+  }
+  
+  void getPortfolioResponse()
+  {
+    sendPortfolioRequest().listen((ProgressEvent e)
+    {
+      if(request.readyState == 4)
+      {
+        if(request.status == 200)
+        {
+          setFoldersList();
+        }
+        else if(request.status == 500)
+        {
+          setEmptyList();
+        }
+      }
+    });
+  }
+  
+  void getPortfolioFileResponse()
+  {
+    sendPortfolioRequest().listen((ProgressEvent e)
+    {
+      if(request.readyState == 4)
+      {
+        if(request.status == 200)
+        {
+          setFileList();
+        }
+        else if(request.status == 500)
+        {
+          window.alert("no registries");
+        }
+      }
     });
   }
   
@@ -84,6 +122,10 @@ class SoapRequest
           {
             setRegistryList();
           } 
+          else if(request.responseText.contains("getPropertiesList"))
+          {
+            setFoldersList();
+          }
           else if(request.responseText.contains("removeRegistryEntry"))
           {
           }
@@ -93,7 +135,8 @@ class SoapRequest
         else
         {
           SelectPopup sp = new SelectPopup();
-          sp.popup(request.responseText, false, true, false, false, true, true, true, false, true, "#popUpDiv");
+          sp.popup(request.responseText, null, null, false, true, false, false, true, true, 
+                    true, false, true, "#popUpDiv");
         }
       }
     });
@@ -132,6 +175,26 @@ class SoapRequest
     request.setRequestHeader('Content-Type', 'text/xml');
     request.setRequestHeader("Authorization", "Basic "+window.sessionStorage['credentials']);
     setXml();
+    request.send(buffer.toString());
+    return request.onReadyStateChange;
+  }
+  
+  Stream<ProgressEvent> sendPortfolioRequest()
+  {
+    String uriv = "http://"+host()+"/PortfolioService/PortfolioServiceService";
+    request.open("POST", uriv);
+    request.setRequestHeader("accept", "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2");
+    request.setRequestHeader('Content-Type', 'text/xml');
+    request.setRequestHeader("Authorization", "Basic "+window.sessionStorage['credentials']);
+    buffer.writeln("<?xml version='1.0' encoding='UTF-8'?>");
+    buffer.writeln("<S:Envelope xmlns:S='http://schemas.xmlsoap.org/soap/envelope/'>");
+    buffer.writeln("<S:Header/>");
+    buffer.writeln("<S:Body>");
+    buffer.writeln("<ns2:"+getAction()+" xmlns:ns2='http://"+"server.decsim.com"+"/'>");
+    writeRequestArguments();
+    buffer.writeln("</ns2:"+getAction()+">");
+    buffer.writeln("</S:Body>");
+    buffer.writeln("</S:Envelope>");
     request.send(buffer.toString());
     return request.onReadyStateChange;
   }
@@ -246,6 +309,10 @@ class SoapRequest
   {
     String response = request.responseText;
     List projects = ParseResponse.parse("<return>", "</return>", response);
+    for(int i = 0; i < projects.length; i++)
+    {
+      local['project$i'] = projects[i];
+    }
     SetElementValues.getProjects(projects);
   }
   
@@ -261,8 +328,32 @@ class SoapRequest
     {
       PopupWindow puw = new PopupWindow();
       querySelector("#dismissFinal").onClick.listen(puw.dismissPrompt);
-      sp.popup("no-registries", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("no-registries", null, null, false, true, false, false, true, false, true, true, true, "#popUpDiv");
     }
+  }
+  
+  setFoldersList()
+  {
+    List projectFolders = new List<String>();
+    String response = request.responseText;
+    projectFolders = ParseResponse.parseFolderNames("<return>", "</return>", "<item>", "</item>", response);
+    int folderLength = projectFolders.length;
+    SetElementValues.setProjectFoldersList(folderLength);
+  }
+  
+  setFileList()
+  {
+    List projectFiles = new List<String>();
+    String response = request.responseText;
+    projectFiles = ParseResponse.parseFileNames("<return>", "</return>", "<item>", "</item>", response);
+    int fileLength =  projectFiles.length;
+    SetElementValues.setProjectFilesList(fileLength);
+  }
+  
+  setEmptyList()
+  {
+    TableElement table = querySelector("#projectFolders");
+    table.innerHtml = "";
   }
 } 
   

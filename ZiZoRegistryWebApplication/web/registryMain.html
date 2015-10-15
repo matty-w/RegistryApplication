@@ -32,29 +32,39 @@
     </select>
     </div>  
       
-  <div id="blanket" style="display:none"></div>
+    <div id="blanket" style="display:none"></div>
     <div id="popUpDiv" style="display:none">
       <br>
       <br id="addBreak" hidden>
-      <img id = "tick" src = "images/ticksmall.png"/>
+      <div id="pictureDiv"><img id = "tick" src = "images/ticksmall.png"/></div>
       <h2 id = "popupTitle">Licence Created</h2>
-      <div align="center">
-      <label id="addLabel1" style="display: none">Registry Key:</label><input id="text" type="text" style="display: none">
-      <br id="break" hidden>
-      <label id="addLabel2" style="display: none">Content Path:</label><select id="select" type="text" style="display: none"></select>
+      <div id="divMiddle" align="left">
+        <ul id="ulRegKey" class="form-style-1" style="display: none">
+          <li><label id="addLabel1" style="display: none">Registry Key:<span class="required">*</span></label>
+              <input id="text"  type="text" id = "username" class="field-long" placeholder="Registry Key"  style="display: none"/>
+          </li>
+        </ul>
+        <ul id="ulConPath" class="form-style-1" style="display: none">
+          <li><label id="addLabel2" style="display: none">Content Path:<span class="required">*</span></label>
+              <input id="browseText" type="text" id = "username" class="field-long" placeholder="Content Path" style="display: none" />
+              <button id="browseButton" style="display: none">Browse</button>
+          </li>
+        </ul>
       </div>
+      
       <p id = "popupParagraph"><output id = "popupText"></output><output id = "serverResponse"></output><p>
-      <div align="center">
+      <div id = "buttonPlacement" align="center">
       <button id = "dismissFinal" class = "dismissButton">Dismiss</button>
       <button id = "addRegistry" class = "popupButtons">Add Registry</button>
-      <button id = "no" class = "dismissButton">No</button>
+      <button id = "no" class = "dismissButton">Dismiss</button>
       <button id = "yes" class = "popupButtons">Yes</button>
       </div>
     </div>
              
       <div id="pageLayout">
         <h2 id="registryTitle">The ZiZo Registry Application</h2>
-        <h3 id="registrySubTitle">Select The Registry Files You Wish To Edit Below:</h3>
+        <h3 id="registrySubTitle">Select The Keys You Wish To Edit Below:</h3>
+        <h3 id="registrySubTitle"><output id="selectedProjectTitle"></output></h3>
           <div id="registryTableDiv">
             <table id="registryTable" hidden>
             </table>

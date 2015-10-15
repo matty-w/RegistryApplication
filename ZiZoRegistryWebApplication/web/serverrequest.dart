@@ -69,6 +69,28 @@ class ServerRequest extends SoapRequest
     result.getResponse();
   }
   
+  static void showProjectFolders(String username, String password, String projectName, String key, String host)
+  {
+    ServerRequest result;
+    result = new ServerRequest();
+    result.setHost(host);
+    result.setAction("getPropertiesList");
+    result.addArgument(projectName);
+    result.addArgument(key);
+    result.getPortfolioResponse();   
+  }
+  
+  static void showProjectFiles(String username, String password, String projectPath, String key, String host)
+  {
+    ServerRequest result;
+    result = new ServerRequest();
+    result.setHost(host);
+    result.setAction("getPropertiesList");
+    result.addArgument(projectPath);
+    result.addArgument(key);
+    result.getPortfolioFileResponse();
+  }
+  
   @override
   namespace()
   {

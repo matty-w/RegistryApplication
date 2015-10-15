@@ -5,6 +5,8 @@ import 'serverrequest.dart';
 import 'popupselection.dart';
 import 'setelementvalues.dart';
 
+List<String> projectList = new List();
+
 class ServerFunctions
 {
   SelectPopup sp = new SelectPopup();
@@ -18,7 +20,7 @@ class ServerFunctions
       ServerRequest.deleteRegistryFile(window.sessionStorage['username'],window.sessionStorage['password']
                                       , catalogueKeys[i], ServerRequest.defaultUri());
     }
-    sp.popup("delete-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+    sp.popup("delete-success", null, null, false, false, false, false, true, true, true, false, true, "#popUpDiv");
   }
   
   void completeTask(MouseEvent m)
@@ -26,11 +28,11 @@ class ServerFunctions
     InputElement text = querySelector("#addRegistry");
     if(text.innerHtml == "Edit Registry")
     {
-      sp.popup("edit-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("edit-success", null, null, false, false, false, false, true, true, true, false, true, "#popUpDiv");
     }
     else if(text.innerHtml == "Add Registry")
     {
-      sp.popup("add-success", false, false, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("add-success", null, null, false, false, false, false, true, true, true, false, true, "#popUpDiv");
     }
   }
   
@@ -39,22 +41,36 @@ class ServerFunctions
     List catalogueKeys = SetElementValues.deleteKeys();
     if(catalogueKeys.length == 0 || catalogueKeys == null)
     {
-      sp.popup("no-entries-selected", false, true, false, false, true, true, true, false, true, "#popUpDiv");
+      sp.popup("no-entries-selected", null, null, false, true, false, false, true, false, true, true, true, "#popUpDiv");
     }
     if(catalogueKeys.length > 0)
     {  
-      sp.popupListFilesForDeletion("list-files", catalogueKeys, "#popUpDiv");
+      sp.popup("list-files", null, catalogueKeys, false, true, false, false, true, false, false, true, true, "#popUpDiv");
     }
   }
   
   void addButton(MouseEvent m)
   {
-    sp.popup("add-registry", true, false, true, true, false, true, true, false, false, "#popUpDiv");
+    sp.popup("add-registry", null, null, true, false, true, true, false, true, true, false, false, "#popUpDiv");
   }
   
   void editButton(MouseEvent m)
   {
-    sp.popup("edit-registry", true, false, true, false, true, true, true, false, false, "#popUpDiv");
+    List catalogueKeys = SetElementValues.deleteKeys();
+    if((catalogueKeys.length == 0 || catalogueKeys == null))
+    {
+      sp.popup("no-entries-selected-edit", null, null, false, true, false, false, true, false, true, true, 
+          true, "#popUpDiv");
+    }
+    if(catalogueKeys.length > 1)
+    {
+      sp.popup("too-many-selected", null, null, false, true, false, false, true, true, true, false, true, "#popUpDiv"); 
+    }
+    else if(catalogueKeys.length == 1)
+    {
+      String a = catalogueKeys[0];
+      sp.popup("edit-registry", a, null, true, false, true, false, true, true, true, false, false, "#popUpDiv");
+    }
   }
   
   void listenToBox(MouseEvent m)
@@ -95,9 +111,83 @@ class ServerFunctions
     }
   }
   
+  static void storeProjects(List projects)
+  {
+    projectList = projects;
+  }
+  
   void loadProjects(Event e)
   {
     ServerRequest.listProjects(window.sessionStorage['username'],window.sessionStorage['password']
-                                ,ServerRequest.defaultUri());
+                                    ,ServerRequest.defaultUri());
+  }
+  
+  void loadExplorerProjects(Event e)
+  {
+    int i = int.parse(window.sessionStorage['projectsLength']);
+    SetElementValues.setProjectExplorerList(i);
+  }
+  
+  void showFolders(int i)
+  {
+    TableElement table = querySelector("#projectFolders");
+    OutputElement title = querySelector("#projectSelected");
+    InputElement folderPathBox = querySelector("#folderPath");
+    ButtonElement ok = querySelector("#okExplorer");
+    ok.disabled = true;
+    title.innerHtml = "  "+window.sessionStorage['project$i'];
+    table.innerHtml = "";
+    folderPathBox.value = "";
+    String projectName = window.sessionStorage['project$i'];
+    ServerRequest.showProjectFolders(window.sessionStorage['username'],window.sessionStorage['password'], projectName, 
+                                     "BuildTables", ServerRequest.defaultUri());
+  }
+  
+  void selectFolderDestination(int i)
+  {
+    OutputElement output = querySelector("#projectSelected");
+    String projectName = output.innerHtml;
+    InputElement folderPathBox = querySelector("#folderPath");
+    String projectPath = projectName+"/"+window.sessionStorage['folderName$i'];
+    folderPathBox.value = projectName+"/"+window.sessionStorage['folderName$i'];
+    window.sessionStorage['filePath'] = projectPath;
+    ServerRequest.showProjectFiles(window.sessionStorage['username'],window.sessionStorage['password'], projectPath, 
+                                     "*", ServerRequest.defaultUri());
+  }
+  
+  void selectFileDestination(int fileNum, int fileLength)
+  {
+    TableCellElement clickedcell = querySelector("#file$fileNum");
+    InputElement folderPathBox = querySelector("#folderPath");
+    ButtonElement ok = querySelector("#okExplorer"); 
+    String path = window.sessionStorage['filePath'];
+    for(int i = 0; i < fileLength; i++)
+    {
+      if(i == fileNum)
+      {
+        clickedcell.style.backgroundColor = "#CDE7F0";
+        folderPathBox.value = path+"/"+window.sessionStorage['projectfile$fileNum'];
+        window.sessionStorage['finishedFilePath'] = folderPathBox.value;
+        ok.disabled = false;
+      }
+      else if(i != fileNum)
+      {
+        TableCellElement unclickedFile = querySelector("#file$i");
+        unclickedFile.style.backgroundColor = "";
+      }
+    }
+  }
+  
+  setItem(MouseEvent m)
+  {
+    InputElement pathBox = querySelector("#folderPath");
+    window.localStorage['finishedFilePath'] = pathBox.value;
+    window.close();     
+  }
+  
+  showStorage(Event e)
+  {
+    InputElement browseBox = querySelector("#browseText");
+    browseBox.value = window.localStorage['finishedFilePath'].trim();
   }
 }

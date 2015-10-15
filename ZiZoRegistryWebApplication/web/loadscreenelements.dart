@@ -19,4 +19,11 @@ class LoadScreenElements
     window.onLoad.listen(sf.loadProjects);
     ltb.listenToRegistryButtons();
   }
+  
+  void fileExplorer()
+  {
+    ServerFunctions sf = new ServerFunctions();
+    window.onLoad.listen(sf.loadExplorerProjects);
+    ltb.listenToFolderExplorer();
+  }
 }

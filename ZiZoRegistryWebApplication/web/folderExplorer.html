@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/fileExplorerStyle.css">
+    <title>Folder Explorer</title>
+  </head>
+ 
+  <body>   
+  <div id="topBar"></div>
+  <h2 id="title">Folders:<output id="projectSelected"></output></h2>
+  <h3 id="subTitle">Select Where You Wish To Place The Registry Below:</h3>
+  <div id="subTopBar"></div>
+  <div id="sideBar"></div>
+  <div id="projectsTitleDiv">
+    <h4>Projects:</h4>
+  </div>
+  <div id="projectTableHolder">
+    <table id="projectNames">
+    </table>
+  </div>
+  <input type = "text" id = "folderPath" disabled = "true"/>
+  <div id="projectFolderHolder">
+    <table id="projectFolders">
+    </table>
+  </div>
+  <div id="bottomBar"></div>
+  <div id="buttonHolder">
+  <div id="resetSizeDiv">
+  </div>
+    <button id="okExplorer" disabled = "true">Ok</button>
+    <button id="cancelExplorer">Cancel</button>
+  </div>
+  
+  
+    <script type="application/dart" src="folderexplorer.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

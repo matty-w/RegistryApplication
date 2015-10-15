@@ -1,5 +1,207 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+
+#default_form
+{
+  position: fixed;
+  width: 25em;
+  margin: 0;
+  padding: 0;
+}
+
+#default_fieldset
+{
+  border: 1px solid #235B6D;
+  width: 25em;
+}
+
+#default_legend
+{
+  color: #fff;
+  background: #235B6D;
+  border: 1px solid #000000;
+  padding: 2px 6px
+}
+
+.form-style-1 
+{
+  margin:0px auto;
+  max-width: 400px;
+  padding: 0px 80px 0px 30px;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.form-style-1 .required
+{
+  color:red;
+}
+
+.form-style-1 .field-long
+{
+  width: 90%;
+}
+
+#browseButton
+{
+  position: absolute;
+  right: 5px;
+  width: 100px;
+}
+
+
+
+
+
+
+#loginTitle
+{
+  color: #ffffff; 
+  font-family: 'Lato', sans-serif; 
+  font-size: 30px; 
+  font-weight: 300; 
+  text-shadow: 1px 1px #000000;
+  text-align: center;
+  position: relative;
+  top: 6em;
+  bottom: auto;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginSubTitle
+{
+  color: #ffffff; 
+  font-family: 'Lato', sans-serif; 
+  font-size: 20px; 
+  font-weight: 300; 
+  text-shadow: 1px 1px #000000;
+  text-align: center; 
+  position: relative;
+  top: 10em;
+  bottom: auto;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login 
+{
+  background: #eceeee;
+  border: 1px solid #42464b;
+  border-radius: 6px;
+  height: 300px;
+  width: 298px;
+  position: relative;
+  top: 14em;
+  bottom: auto;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login h1 
+{
+  background-image: linear-gradient(top, #f1f3f3, #d4dae0);
+  border-bottom: 1px solid #a6abaf;
+  border-radius: 6px 6px 0 0;
+  box-sizing: border-box;
+  color: #727678;
+  display: block;
+  height: 43px;
+  font: 600 14px/1 'Open Sans', sans-serif;
+  padding-top: 14px;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.2), 0 1px 0 #fff;
+}
+
+input#passwordTextbox, input#usernameTextbox 
+{
+  border: 1px solid #a1a3a3;
+  border-radius: 4px;
+  box-shadow: 0 1px #fff;
+  box-sizing: border-box;
+  color: #696969;
+  height: 39px;
+  margin: 31px 0 0 29px;
+  padding-left: 37px;
+  transition: box-shadow 0.3s;
+  width: 240px;
+}
+
+input#passwordTextbox:focus, input#usernameTextbox:focus 
+{
+  box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+  outline: 0;
+}
+
+.forgot:hover 
+{ 
+  color: #3b3b3b
+}
+
+#submitButton
+{
+  width:240px;
+  height:35px;
+  display:block;
+  font-family:Arial, "Helvetica", sans-serif;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
+  text-transform:uppercase;
+  text-align:center;
+  padding-top:6px;
+  margin: 29px 0 0 29px;
+  position:relative;
+  cursor:pointer;
+  border: none;  
+  background-color: #235B6D;
+  background-image: linear-gradient(top,#3db0a6,#3111);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius:5px;
+}
+
+#resetButton
+{
+  width:240px;
+  height:35px;
+  display:block;
+  font-family:Arial, "Helvetica", sans-serif;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
+  text-transform:uppercase;
+  text-align:center;
+  padding-top:6px;
+  margin: 29px 0 0 29px;
+  position:relative;
+  cursor:pointer;
+  border: none;  
+  background-color: #AF2525;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius:5px;
+}
+
+#submitButton:hover
+{
+  background-color: #1C4B5B;  
+}
+
+#resetButton:hover
+{
+  background-color: #901F1F;  
+}
+
+
+
 #loginDetailsDiv
 {
   position: relative;
@@ -104,11 +306,7 @@ h3
 
 #loginForm
 {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 35em;
-  height: 100%;
+
 }
 
 #version
@@ -145,10 +343,7 @@ h3
 
 #usernameTextbox
 {
-  position: absolute;
-  height: 25px;
-  margin-left: 50%;
-  width: 11em;
+
 }
 #usernameLabel
 {
@@ -160,10 +355,7 @@ h3
 
 #passwordTextbox
 {
-  position: absolute;
-  height: 25px;
-  width: 11em;
-  margin-left: 50%;
+
 }
 
 #passwordLabel
@@ -172,19 +364,6 @@ h3
   text-shadow: 1px 1px #000000;
   position: absolute;
   margin-left: 7.75%;
-}
-
-#resetButton
-{
-  position: absolute;
-  width: 50%;
-}
-
-#submitButton
-{
-  position: absolute;
-  margin-left: 50%;
-  width: 50%;
 }
 
 .loginButtons

@@ -50,13 +50,30 @@ class PopupWindow
   
   void dismissPrompt(MouseEvent e)
   {
-    querySelector("#break").hidden = true;
     querySelector("#addBreak").hidden = true;
     querySelector("#addLabel1").style.display = "none";
     querySelector("#addLabel2").style.display = "none";
-    querySelector("#select").style.display = "none";
+    querySelector("#browseText").style.display = "none";
+    querySelector("#browseButton").style.display = "none";
     querySelector("#text").style.display = "none";
+    querySelector("#ulRegKey").style.display = "none";
+    querySelector("#ulConPath").style.display = "none";   
     dismiss("#popUpDiv");
+  }
+  
+  void dismissPromptReload(MouseEvent m)
+  {
+    window.localStorage['finishedFilePath'] = "";
+    querySelector("#addBreak").hidden = true;
+    querySelector("#addLabel1").style.display = "none";
+    querySelector("#addLabel2").style.display = "none";
+    querySelector("#browseText").style.display = "none";
+    querySelector("#browseButton").style.display = "none";
+    querySelector("#text").style.display = "none";
+    querySelector("#ulRegKey").style.display = "none";
+    querySelector("#ulConPath").style.display = "none";
+    dismiss("#popUpDiv");
+    window.location.reload();
   }
   
   String getLicenceName()
@@ -91,32 +108,42 @@ class PopupWindow
     if(a == true)
     {
       querySelector("#addBreak").hidden = true;
-      querySelector("#break").hidden = true;
     }
     else if(a == false)
     {
       querySelector("#addBreak").hidden = false;
-      querySelector("#break").hidden = false;
     }
   }
   
-  //TODO
   void setKeyTextbox(bool a)
   {
     if(a == true)
     {
       querySelector("#addLabel1").style.display = "inline-block";
       querySelector("#text").style.display = "inline-block";
+      querySelector("#ulRegKey").style.display = "";
       InputElement text = querySelector("#text");
-      text.value = window.sessionStorage['project'].toLowerCase();
+      if(text.value.trim() == "")
+      {
+        text.value = window.localStorage['project'].toLowerCase();
+      }
+      else
+      {
+        text.value = window.sessionStorage['project'].toLowerCase();
+      }
     }
     else if(a == false)
     {
       querySelector("#addLabel1").style.display = "none";
       querySelector("#text").style.display = "none";
-      InputElement text = querySelector("#text");
-      text.value = "";
+      querySelector("#ulRegKey").style.display = "none";
     }
+  }
+  
+  void setEditKeyText(String registryKey)
+  {
+    InputElement text = querySelector("#text");
+    text.value = registryKey;
   }
   
   void setSelectPathBox(bool a)
@@ -124,12 +151,16 @@ class PopupWindow
     if(a == true)
     {
       querySelector("#addLabel2").style.display = "inline-block";
-      querySelector("#select").style.display = "inline-block";
+      querySelector("#browseText").style.display = "inline-block";
+      querySelector("#browseButton").style.display = "inline-block";
+      querySelector("#ulConPath").style.display = "";
     }
     else if(a == false)
     {
       querySelector("#addLabel2").style.display = "none";
-      querySelector("#select").style.display = "none";
+      querySelector("#browseText").style.display = "none";
+      querySelector("#browseButton").style.display = "none";
+      querySelector("#ulConPath").style.display = "none";
     }
   }
   
@@ -138,20 +169,20 @@ class PopupWindow
     if(a == false)
     {
       querySelector("#addBreak").hidden = true;
-      querySelector("#break").hidden = true;
       querySelector("#addLabel1").style.display = "none";
       querySelector("#addLabel2").style.display = "none";
-      querySelector("#select").style.display = "none";
+      querySelector("#browseText").style.display = "none";
+      querySelector("#browseButton").style.display = "none";
       querySelector("#text").style.display = "none";
     }
     else if(a == true)
     {
       querySelector("#addBreak").hidden = false;
-      querySelector("#break").hidden = false;
       querySelector("#addRegistry").innerHtml = "Add Registry";
       querySelector("#addLabel1").style.display = "inline-block";
       querySelector("#addLabel2").style.display = "inline-block";
-      querySelector("#select").style.display = "inline-block";
+      querySelector("#browseText").style.display = "inline-block";
+      querySelector("#browseButton").style.display = "inline-block";
       querySelector("#text").style.display = "inline-block";
     }
   }
@@ -167,7 +198,7 @@ class PopupWindow
   void removePictures(bool a)
   {
     if(a == true)
-      querySelector("#tick").setAttribute("src", "");
+      querySelector("#pictureDiv").innerHtml = "";
     else if(a == false)
       return;
   }
@@ -275,7 +306,23 @@ class PopupWindow
     if(option == "no-entries-selected")
     {
       title = "Error";
-      description = "You Haven't Selected Any Registries For Deletion, Please Select At Least One And Try Again.";
+      description = "You Haven't Selected Any Keys For Deletion, Please Select At Least One And Try Again.";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "too-many-selected")
+    {
+      title = "Error";
+      description = "You Have Selected Too Many Keys For Editing, Please Select Only One Key At A Time";
+      querySelector("#popupTitle").innerHtml = title;
+      OutputElement text = querySelector("#popupText");
+      text.innerHtml = description;
+    }
+    if(option == "no-entries-selected-edit")
+    {
+      title = "Error";
+      description = "You Haven't Selected A Key For Editing, Please Select A Key.";
       querySelector("#popupTitle").innerHtml = title;
       OutputElement text = querySelector("#popupText");
       text.innerHtml = description;
